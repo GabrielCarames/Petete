@@ -1,0 +1,15 @@
+.content {
+    display: grid;
+    grid-template-areas: 
+    'navbar navbar navbar'
+    'body body body'
+    ;
+}
+
+.content .navbar {
+    grid-area: navbar;
+}
+
+.content .body {
+    grid-area: body;
+}

@@ -1,0 +1,6 @@
+.content .navbar {
+    display: grid;
+    grid-template-areas: 'profile index searcher';
+}
+
+.content .navbar .
