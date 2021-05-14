@@ -1,0 +1,69 @@
+.login-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 43em 17.4em;
+    grid-template-areas: 'login-form' 'footer';
+    background-color: rgb(0, 40, 56);
+    color: white;
+}
+
+.login-content {
+    grid-area: login-form;
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'text form';
+}
+
+.login-footer {
+    grid-area: footer;
+    background-color: rgb(50, 172, 216);
+}
+
+.login-content .text {
+    grid-area: text;
+}
+
+.login-content .form {
+    grid-area: form;
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-rows: 3em;
+    grid-template-areas: 
+    'email'
+    'password'
+    'submit'
+    'forgotten'
+    'divider'
+    'register'
+    ;
+    gap: 1em;
+}
+
+.form .email {
+    grid-area: email;
+}
+
+.form .password {
+    grid-area: password;
+}
+
+.form .submit {
+    grid-area: submit;
+}
+
+.form .forgotten {
+    grid-area: forgotten;
+}
+
+.form .divider {
+    grid-area: divider;
+    height: 0.2em;
+    background-color: rgb(255, 0, 0);
+}
+
+.form .register {
+    grid-area: register;
+}
+

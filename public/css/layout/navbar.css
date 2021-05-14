@@ -1,6 +1,25 @@
 .content .navbar {
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 3em;
     grid-template-areas: 'profile index searcher';
+    align-items: center;
+    justify-items: center;
+    background-color: rgb(0, 48, 66);
 }
 
-.content .navbar .
+.content .navbar a {
+    color: rgb(255, 255, 255);
+}
+
+.content .navbar .profile{
+    grid-area: profile;
+}
+
+.content .navbar .index{
+    grid-area: index;
+}
+
+.content .navbar .searcher{
+    grid-area: searcher;
+}
