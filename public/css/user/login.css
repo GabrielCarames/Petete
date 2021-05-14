@@ -3,8 +3,10 @@
     grid-template-columns: 1fr;
     grid-template-rows: 43em 17.4em;
     grid-template-areas: 'login-form' 'footer';
-    background-color: rgb(0, 40, 56);
-    color: white;
+    background-color: rgb(249, 253, 255);
+    color: black;
+    font-family: 'Anton', sans-serif;
+    font-family: 'Libre Franklin', sans-serif;
 }
 
 .login-content {
@@ -12,24 +14,28 @@
     align-self: center;
     justify-self: center;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 23em;
     grid-template-areas: 'text form';
+    gap: 4em;
 }
 
 .login-footer {
     grid-area: footer;
-    background-color: rgb(50, 172, 216);
+    background-color: rgb(0, 67, 93);
 }
 
-.login-content .text {
+.login-content .text{
     grid-area: text;
+    font-size: 1.5em;
 }
 
 .login-content .form {
+    padding: 1em;
     grid-area: form;
+    text-align: center;
     display: grid;
     grid-template-columns: auto;
-    grid-auto-rows: 3em;
+    grid-template-rows: repeat(3, 3em) 2em .2em 3em;
     grid-template-areas: 
     'email'
     'password'
@@ -39,6 +45,13 @@
     'register'
     ;
     gap: 1em;
+    background-color: rgb(255, 255, 255);
+    box-shadow:  2px 2px 10px 0 rgb(93, 93, 93);
+    border-radius: 10px;
+}
+
+.form input {
+    padding: 20px;
 }
 
 .form .email {
@@ -59,11 +72,16 @@
 
 .form .divider {
     grid-area: divider;
-    height: 0.2em;
-    background-color: rgb(255, 0, 0);
+    height: 1px;
+    background-color: rgb(167, 167, 167);
 }
 
 .form .register {
     grid-area: register;
+    padding-top: 1em;
 }
 
+.form button {
+    background-color: rgb(45, 147, 187);
+    color: white;
+}
