@@ -1,0 +1,110 @@
+.register-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 43em 17.4em;
+    grid-template-areas: 'register-form' 'footer';
+    background-color: rgb(249, 253, 255);
+    color: black;
+    font-family: 'Anton', sans-serif;
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+.register-content {
+    grid-area: register-form;
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'text form';
+    gap: 4em;
+}
+
+.register-footer {
+    grid-area: footer;
+    background-color: rgb(0, 67, 93);
+}
+
+.register-content .text{
+    grid-area: text;
+    font-size: 1.5em;
+}
+
+.register-content .form {
+    padding: 1em;
+    grid-area: form;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: repeat(6, 3em) 2em .2em 3em;
+    grid-template-areas: 
+    'name surname'
+    'password password'
+    'email email'
+    'country country'
+    'gender age'
+    'submit submit'
+    'already already'
+    'divider divider'
+    'login login'
+    ;
+    gap: 1em;
+    background-color: rgb(255, 255, 255);
+    box-shadow:  2px 2px 10px 0 rgb(93, 93, 93);
+    border-radius: 10px;
+}
+
+.form input {
+    padding: 20px;
+}
+
+.form .name {
+    grid-area: name;
+}
+
+.form .surname {
+    grid-area: surname;
+}
+
+.form .password {
+    grid-area: password;
+}
+.form .email {
+    grid-area: email;
+}
+
+.form .country {
+    grid-area: country;
+}
+
+.form .gender {
+    grid-area: gender;
+}
+
+.form .age {
+    grid-area: age;
+}
+
+.form .submit {
+    grid-area: submit;
+    background-color: rgb(45, 147, 187);
+}
+
+.form .already {
+    grid-area: already;
+}
+
+.form .divider {
+    grid-area: divider;
+    height: 1px;
+    background-color: rgb(167, 167, 167);
+}
+
+.form .login {
+    grid-area: login;
+    padding-top: 1em;
+    background-color: rgb(0, 71, 98);
+}
+
+.form button {
+    color: white;
+}

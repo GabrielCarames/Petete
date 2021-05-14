@@ -64,6 +64,7 @@
 
 .form .submit {
     grid-area: submit;
+    background-color: rgb(45, 147, 187);
 }
 
 .form .forgotten {
@@ -79,9 +80,9 @@
 .form .register {
     grid-area: register;
     padding-top: 1em;
+    background-color: rgb(0, 71, 98);
 }
 
 .form button {
-    background-color: rgb(45, 147, 187);
     color: white;
 }
