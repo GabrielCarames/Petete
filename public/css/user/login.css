@@ -19,11 +19,6 @@
     gap: 4em;
 }
 
-.login-footer {
-    grid-area: footer;
-    background-color: rgb(0, 67, 93);
-}
-
 .login-content .text{
     grid-area: text;
     font-size: 1.5em;
@@ -83,6 +78,60 @@
     background-color: rgb(0, 71, 98);
 }
 
-.form button {
+.form .submit, .form .register b {
     color: white;
 }
+
+.login-footer {
+    grid-area: footer;
+    background-color: rgb(0, 67, 93);
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px)
+{
+    .login-section {
+        grid-template-rows: 40em 13.2em;
+    }
+    .login-content {
+        grid-template-columns: 1fr;
+        grid-template-rows: 14em 22em;
+        grid-template-areas: 'text' 'form';
+        gap: 0;
+        align-self: auto;
+    }
+    .login-content .text{
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px)
+{
+    .login-content {
+        grid-template-columns: 1fr 1fr;
+        width: 90%;
+    }
+}
+
+
+
+/*
+@media screen and (min-width: 320px) and (max-width: 1024px)
+{
+    .login-section {
+        grid-template-rows: 40em 13.2em;
+    }
+    .login-content {
+        grid-template-columns: 0.95fr;
+        grid-template-rows: 14em 22em;
+        grid-template-areas: 'text' 'form';
+        margin-left: 1em;
+        gap: 0;
+        align-self: auto;
+    }
+    .login-content .text{
+        text-align: center;
+    }
+    .login-content .form {
+        
+    }
+}*/
