@@ -108,3 +108,37 @@
 .form button {
     color: white;
 }
+
+@media screen and (min-width: 320px) and (max-width: 768px)
+{
+    .register-section {
+        grid-template-rows: 50em 13.2em;
+        gap: 5em;
+    }
+    .register-content {
+        grid-template-columns: 1fr;
+        grid-template-rows: 14em 22em;
+        grid-template-areas: 'text' 'form';
+        gap: 0;
+        align-self: auto;
+    }
+    .register-content .text{
+        text-align: center;
+    }
+    .register-content .form {
+        grid-template-columns: 97%;
+        grid-template-rows: repeat(7, 3em) 2em .2em 3em;
+        grid-template-areas: 
+        'name'
+        'surname'
+        'password'
+        'email'
+        'country'
+        'age'
+        'submit'
+        'already'
+        'divider'
+        'login'
+        ;
+    }
+}
