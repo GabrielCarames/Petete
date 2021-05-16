@@ -3,7 +3,6 @@ const passport = require('passport');
 var router = express.Router();
 
 router.get('/login', function(req, res, next) {
-  console.log("chefallocreo")
   res.render('user/login', {layout: false});
 });
 
@@ -24,7 +23,7 @@ router.post('/register', passport.authenticate('register',
 router.post('/login', passport.authenticate('login',
   {
     successRedirect: '/',
-    failureRedirect: '/user/',
+    failureRedirect: '/',
     passReqToCallback: true
   }
 ));

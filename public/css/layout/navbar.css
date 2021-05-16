@@ -1,7 +1,7 @@
 .content .navbar {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-rows: 3em;
+    grid-auto-rows: 4em;
     grid-template-areas: 'profile index searcher';
     align-items: center;
     justify-items: center;

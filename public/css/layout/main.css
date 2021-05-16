@@ -13,6 +13,20 @@ body {
     grid-area: navbar;
 }
 
-.content .body {
-    grid-area: body;
+.navbar .index {
+    display: grid;
+    grid-template-columns: 4em 4em 4em 4em;
+    grid-template-rows: 2em;
+    gap: 2em;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.index a{
+    padding: 10%;
+}
+
+.index a:hover {
+    background-color: rgb(0, 113, 158);
+    transition: .000001s;
 }

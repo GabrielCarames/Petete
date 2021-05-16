@@ -1,16 +1,19 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Franklin:wght@100&display=swap" rel="stylesheet"> 
-    <link rel='stylesheet' href='/css/normalize.css' />
-    <link rel='stylesheet' href='/css/layout/main.css' />
-    <link rel='stylesheet' href='/css/layout/navbar.css' />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Franklin:wght@100&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/layout/main.css" />
+    <link rel="stylesheet" href="/css/layout/navbar.css" />
+    <script src="https://kit.fontawesome.com/20e44dbf94.js" crossorigin="anonymous"></script>
 
 </head>
+
 <body>
     <div class="content">
         <div class="navbar">
@@ -18,22 +21,23 @@
                 <a href="#">Registro</a>
             </div>
             <div class="index">
-                <a href="#">Inicio</a>
-                <a href="#">Tachancka</a>
-                <a href="#">Tachancka</a>
-                <a href="#">Tachcancka</a>
+                <a href="#"><i class="fas fa-home"></i></a>
+                <a href="#"><i class="fas fa-user-friends"></i></a>
+                <a href="#"><i class="fas fa-store"></i></a>
+                <a href="#"><i class="fas fa-users"></i></a>
             </div>
             <div class="searcher">
                 <form action="#" method="POST">
-                    <input type="text" placeholder="Buscar">
+                    <input type="text" placeholder="Buscar" />
                     <button><i class="fas fa-search"></i></button>
                 </form>
             </div>
-            
+
         </div>
         <div class="body">
-            {{body}}
+            {{{body}}}
         </div>
     </div>
 </body>
+
 </html>

@@ -5,9 +5,8 @@ router.get('/', function(req, res, next) {
   var user = req.user
   if(!user) {
     res.redirect('/user/login')
-    //res.render('user/login', {layout: false});
   } else {
-    res.render('index', user);
+    res.render('index');
   }
 });
 
