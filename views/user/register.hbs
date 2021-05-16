@@ -7,12 +7,12 @@
         <div class="text">
             <h1>Petete</h1> <p>Registra tu cuenta ahora para disfrutar de Petete en todo momento!</p>
         </div>
-        <div class="form">
-            <input class="name" type="text" placeholder="Nombre" required>
-            <input class="surname" type="text" placeholder="Apellido" required>
-            <input class="password" type="password" placeholder="Contraseña" required>
-            <input class="email" type="text" placeholder="Correo Electrónico" required>
-            <input class="country" type="text" placeholder="País" required>
+        <form class="form" action="/user/register" method="POST">
+            <input class="name" name="name" type="text" placeholder="Nombre" required>
+            <input class="surname" name="surname" type="text" placeholder="Apellido" required>
+            <input class="password" name="password" type="password" placeholder="Contraseña" required>
+            <input class="email" name="email" type="text" placeholder="Correo Electrónico" required>
+            <input class="country" name="country" type="text" placeholder="País" required>
             <p class="gender">
                 <label>Género:</label>
                 <select name="gender">
@@ -25,14 +25,14 @@
             <p class="age">
                 <label>Edad:</label>
                 <select name="age">
-                    <option value="one">1</option>
+                    <option value="1">1</option>
                 </select>
             </p>
             <button class="submit" type="submit"><b>Crear cuenta</b></button>
             <label class="already"><b>¿Ya tienes una cuenta?</b></a></label>
             <div class="divider"></div>
             <button class="login"><a href="/"><b>Ingresar</b></a></button>
-        </div>
+        </form>
     </div>
     <div class="register-footer">
         Petete@Todos los derechos reservados

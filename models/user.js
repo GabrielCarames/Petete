@@ -31,6 +31,10 @@ const User = new Schema({
         type: String,
         required: true
     },
+    age: {
+        type: Number,
+        required: true
+    },
     friends: [
         {
             type: Schema.Types.ObjectId,

@@ -11,12 +11,27 @@ passport.deserializeUser(async (id, done) => {
     done(null, user);
 }); 
 
+passport.use('register', new LocalStrategy({
+    usernameField: 'name',
+    passwordField: 'password',
+    passReqToCallback: true
+}, async (req, name, password, done) => {
+    const targetUser = await userController.findByName(name)
+    if (targetUser) return done(null, false);
+    else {
+        const newUser = await userController.createUser(req.body)
+        done(null, newUser);
+    }
+}
+));
+
 passport.use('login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, email, password, done) => {
     const targetUser = await userController.findByEmail(email)
+    console.log("sos rep tuoxDD", targetUser)
     if (!targetUser) return done(null, false)
     return done(null, targetUser);
 }));

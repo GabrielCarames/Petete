@@ -17,8 +17,8 @@ exports.isAuthenticated = (req, res, next) => {
 }*/
 
 exports.createUser = async (values) => {
-    const { name, surname, password, email, country, gender } = values
-    const newUser = new User({ name, surname, password, email, country, gender })
+    const { name, surname, password, email, country, gender, age } = values
+    const newUser = new User({ name, surname, password, email, country, gender, age })
     await newUser.save()
     return newUser
 }
@@ -39,7 +39,6 @@ exports.findById = async (id) => {
 exports.findByName = async (name) => {
     return User.findOne({ 'name': name })
 }
-
 
 exports.findByEmail = async (email) => {
     return User.findOne({ 'email': email })
