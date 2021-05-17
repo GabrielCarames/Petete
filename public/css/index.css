@@ -14,6 +14,72 @@
     background-color: rgb(0, 48, 66);
 }
 
+.publications input {
+    width: 26em;
+    border-radius: 5px;
+}
+
 .friends {
     grid-area: friends;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 15em; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+.modal-content {
+    margin-left: 25%;
+    width: 500px;
+    background-color: rgb(0, 48, 66);
+    color: white;
+    border: 1px solid #888;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 31em;
+    grid-template-rows: 2em 8em 2em;
+    grid-template-areas: 
+    'title'
+    'message'
+    'button';
+    padding: 1em;
+}
+
+.modal-content .title {
+    grid-area: title;
+}
+
+.modal-content .message {
+    grid-area: message;
+}
+
+.message input{
+    height: 100%;
+    width: 100%;
+}
+
+.modal-content .button {
+    grid-area: button;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }

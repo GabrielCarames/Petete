@@ -6,8 +6,41 @@
 </div>
 <div class="publications">
     <img src="" alt="imagendeperfil">
-    <input type="text" placeholder="¿Qué estas pensando?">
+    <input id="button" type="text" placeholder="¿Qué estás pensando?">
+    <div id="modal" class="modal">
+    <div class="modal-content">
+        <div class="title">    
+            <span class="close">&times;</span>
+            <p>Crear publicación</p>
+        </div>
+        <form class="message">
+            <input type="text" placeholder="¿Qué estás pensando?">
+        </form>
+        <div class="button">
+            <button> ingresa?</button>
+        </div>
+    </div>
+    </div>
 </div>
 <div class="fiends">
 
 </div>
+
+
+
+<script>
+    var button = document.getElementById("button");
+    var modal = document.getElementById("modal");
+    var span = document.getElementsByClassName("close")[0];
+    button.onclick = function() {
+        modal.style.display = "block";
+    }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
