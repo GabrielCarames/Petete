@@ -49,6 +49,10 @@
     padding: 20px;
 }
 
+.form button:hover{
+    cursor: pointer;
+}
+
 .form .email {
     grid-area: email;
 }
@@ -61,6 +65,7 @@
     grid-area: submit;
     background-color: rgb(45, 147, 187);
 }
+
 
 .form .forgotten {
     grid-area: forgotten;

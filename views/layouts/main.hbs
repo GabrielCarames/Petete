@@ -9,7 +9,6 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="/css/normalize.css" />
     <link rel="stylesheet" href="/css/layout/main.css" />
-    <link rel="stylesheet" href="/css/layout/navbar.css" />
     <script src="https://kit.fontawesome.com/20e44dbf94.js" crossorigin="anonymous"></script>
 
 </head>
@@ -18,7 +17,7 @@
     <div class="content">
         <div class="navbar">
             <div class="profile">
-                <a href="#">Registro</a>
+                <a href="#">Perfil</a>
             </div>
             <div class="index">
                 <a href="#"><i class="fas fa-home"></i></a>
@@ -27,12 +26,18 @@
                 <a href="#"><i class="fas fa-users"></i></a>
             </div>
             <div class="searcher">
-                <form action="#" method="POST">
+                <form>
                     <input type="text" placeholder="Buscar" />
-                    <button><i class="fas fa-search"></i></button>
+                    
+                    <a class="searcher-button"><i class="fas fa-search"></i></a>
                 </form>
             </div>
-
+            <div class="hidden-searcher">
+                <form>
+                    <input type="text" placeholder="Buscar" />
+                    <a><i class="fas fa-search"></i></a>
+                </form>
+            </div>
         </div>
         <div class="body">
             {{{body}}}
@@ -41,3 +46,11 @@
 </body>
 
 </html>
+
+<script>
+    const buttonToggle = document.querySelector('.searcher-button');
+    buttonToggle.addEventListener('click', function () {
+        console.log("fuitocadopordios")
+        document.querySelector('.hidden-searcher').classList.toggle('active');
+    });
+</script>

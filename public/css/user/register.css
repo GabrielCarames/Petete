@@ -57,6 +57,10 @@
     padding: 20px;
 }
 
+.form button:hover{
+    cursor: pointer;
+}
+
 .form .name {
     grid-area: name;
 }
