@@ -1,0 +1,19 @@
+.groups {
+    grid-area: groups;
+}
+
+.publications {
+    grid-area: publications;
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 2em 30em;
+    grid-auto-rows: 4em;
+    gap: 1em;
+    align-items: center;
+    justify-items: center;
+    background-color: rgb(0, 48, 66);
+}
+
+.friends {
+    grid-area: friends;
+}
