@@ -13,11 +13,11 @@
             <span class="close">&times;</span>
             <p>Crear publicación</p>
         </div>
-        <form class="message">
-            <textarea type="text" placeholder="¿Qué estás pensando?"></textarea>
+        <form class="message" action="/publications/uploadpublication" method="POST" id="upload-form">
+            <textarea name="text" type="text" placeholder="¿Qué estás pensando?"></textarea>
         </form>
         <div class="button">
-            <button>Publicar</button>
+            <button type="submit" form="upload-form" >Publicar</button>
         </div>
     </div>
     </div>

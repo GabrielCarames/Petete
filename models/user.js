@@ -47,10 +47,10 @@ const User = new Schema({
             ref: 'Notification',
         }
     ],
-    videos: [
+    publications: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Video',
+            ref: 'Publication',
         }
     ],
     createdAt: {

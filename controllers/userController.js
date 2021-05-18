@@ -6,15 +6,15 @@ exports.isAuthenticated = (req, res, next) => {
     res.redirect('/');
 }
 
-/*exports.addWeaponToUser = async (userId, newWeapon) => {
+exports.addPublicationToUser = async (userId, newPublication) => {
     await User.findOneAndUpdate({ _id: userId },
         {
             $push: {
-                weapons: newWeapon
+                publications: newPublication
             }
         }
     )
-}*/
+}
 
 exports.createUser = async (values) => {
     const { name, surname, password, email, country, gender, age } = values

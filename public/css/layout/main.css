@@ -1,6 +1,7 @@
 .content {
     font-family: 'Anton', sans-serif;
     font-family: 'Libre Franklin', sans-serif;
+    font-weight: 1000;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 4em 1fr;

@@ -11,6 +11,7 @@ require('./passport/authenticator');
 
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
+var publicationsRouter = require('./routes/publications');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
+app.use('/publications', publicationsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
