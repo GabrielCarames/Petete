@@ -31,7 +31,21 @@
 
 .publications-menu .publications {
     grid-area: publications;
+    display: grid;
+    grid-template-columns: 10% 1fr;
+    grid-template-rows: 3em 3em;
+    
     background-color: rgb(0, 48, 66);
+    color: white;
+    gap: 1em;
+}
+
+.publications .user {
+    
+}
+
+.publications .description {
+    
 }
 
 .friends {

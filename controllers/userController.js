@@ -44,7 +44,7 @@ exports.getAllUsers = async () => {
     return await User.find().populate({
         path: 'publications',
         model: 'Publication'
-    })
+    }).lean()
 }
 
 exports.findByName = async (name) => {

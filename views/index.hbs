@@ -25,17 +25,14 @@
     </div>
     <div class="publications">
         {{#if publications}}
-        sosputo
             {{#each publications}}
                 <div class="user">
-                    
-                    
-                    
-              
-                     <!--aca tengo que traer al objeto de user, rastrear la id de la publicacion y mostrar el nombre del usuario -->
+                    {{#each user}}
+                        {{name}}
+                    {{/each}}  
                 </div>
                 <div class="description">
-                    {{this.description}}
+                    {{description}}
                 </div>
             {{/each}}
         {{else}}
