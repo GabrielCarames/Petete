@@ -8,6 +8,13 @@ router.get('/', async function(req, res) {
     res.redirect('/user/login')
   } else {
     const publications = await publicationController.getAllPublications()
+    /*var hola = publications.forEach(function(publication) {
+      publication.user.forEach(function(user) {
+        var soso = user
+      });
+    });
+    console.log(hola);*/
+    console.log(publications)
     res.render('index', {publications});
   }
 });

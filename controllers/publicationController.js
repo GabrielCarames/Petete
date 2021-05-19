@@ -7,16 +7,30 @@ exports.createPublication = async (values) => {
   return newPublication;
 };
 
-exports.getWeaponsCategory = async (category) => {
-  const weaponsCategory = await this.findByCategory(category);
-  return weaponsCategory;
-};
+exports.addUserToPublication = async (publicationId, user) => {
+  await Publication.findOneAndUpdate({ _id: publicationId },
+      {
+          $push: {
+              user: user
+          }
+      }
+  )
+}
+
+/*exports.getAllPublications = async () => {
+  return Publication.find({}).lean();
+};*/
 
 exports.getAllPublications = async () => {
-  return Publication.find({}).lean();
-};
+  return await Publication.find().populate({
+      path: 'user',
+      model: 'User'
+  })
+}
 
 exports.findPublicationById = async (id) => {
   return await Publication.findOne({_id: id})
 }
+
+
 
