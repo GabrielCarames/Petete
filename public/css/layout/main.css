@@ -68,7 +68,10 @@
 
 .hidden-searcher {
     display: none;
-    /*visibility: visible;*/
+}
+
+.border{
+    border: 10px solid rgb(161, 152, 152);
 }
 
 body {

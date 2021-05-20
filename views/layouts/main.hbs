@@ -9,6 +9,7 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="/css/normalize.css" />
     <link rel="stylesheet" href="/css/layout/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/20e44dbf94.js" crossorigin="anonymous"></script>
 
 </head>
@@ -20,10 +21,10 @@
                 <a href="#">Perfil</a>
             </div>
             <div class="index">
-                <a href="#"><i class="fas fa-home"></i></a>
-                <a href="/user/addfriends"><i class="fas fa-user-friends"></i></a>
-                <a href="#"><i class="fas fa-store"></i></a>
-                <a href="#"><i class="fas fa-users"></i></a>
+                <a class="navbar-href" href="/"><i class="fas fa-home"></i></a>
+                <a class="navbar-href" href="/user/addfriends"><i class="fas fa-user-friends"></i></a>
+                <a class="navbar-href" href="#"><i class="fas fa-store"></i></a>
+                <a class="navbar-href" href="#"><i class="fas fa-users"></i></a>
             </div>
             <div class="searcher">
                 <form>
@@ -47,9 +48,16 @@
 </html>
 
 <script>
+    let prevDiv;
     const buttonToggle = document.querySelector('.searcher-button');
     buttonToggle.addEventListener('click', function () {
         console.log("fuitocadopordios")
         document.querySelector('.hidden-searcher').classList.toggle('active');
+    });
+
+    $(".navbar-href").click(function(){
+        $(prevDiv).removeClass('border');
+        $(this).addClass('border');
+        prevDiv = $(this);
     });
 </script>
