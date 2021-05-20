@@ -1,47 +1,48 @@
 <link rel='stylesheet' href='/css/index.css' />
 
+<div class="index">
+    <div class="groups">
 
-<div class="groups">
-
-</div>
-<div class="publications-menu">
-    <div class="upload-publication">
-        <img src="" alt="imagendeperfil">
-        <input id="button" type="text" placeholder="¿Qué estás pensando?">
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <div class="title">    
-                    <span class="close">&times;</span>
-                    <p>Crear publicación</p>
-                </div>
-                <form class="message" action="/publications/uploadpublication" method="POST" id="upload-form">
-                    <textarea name="text" type="text" placeholder="¿Qué estás pensando?"></textarea>
-                </form>
-                <div class="button">
-                    <button type="submit" form="upload-form" >Publicar</button>
+    </div>
+    <div class="publications-menu">
+        <div class="upload-publication">
+            <img src="" alt="imagendeperfil">
+            <input id="button" type="text" placeholder="¿Qué estás pensando?">
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <div class="title">    
+                        <span class="close">&times;</span>
+                        <p>Crear publicación</p>
+                    </div>
+                    <form class="message" action="/publications/uploadpublication" method="POST" id="upload-form">
+                        <textarea name="text" type="text" placeholder="¿Qué estás pensando?"></textarea>
+                    </form>
+                    <div class="button">
+                        <button type="submit" form="upload-form" >Publicar</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="publications">
+            {{#if publications}}
+                {{#each publications}}
+                    <div class="user">
+                        {{#each user}}
+                            {{name}}
+                        {{/each}}  
+                    </div>
+                    <div class="description">
+                        {{description}}
+                    </div>
+                {{/each}}
+            {{else}}
+                <h1>No hay publicaciones que mostrar, ¡Sé el primero!</h1>
+            {{/if}}
+        </div>
     </div>
-    <div class="publications">
-        {{#if publications}}
-            {{#each publications}}
-                <div class="user">
-                    {{#each user}}
-                        {{name}}
-                    {{/each}}  
-                </div>
-                <div class="description">
-                    {{description}}
-                </div>
-            {{/each}}
-        {{else}}
-            <h1>No hay publicaciones que mostrar, ¡Sé el primero!</h1>
-        {{/if}}
+    <div class="friends">
+        
     </div>
-</div>
-<div class="fiends">
-
 </div>
 
 

@@ -9,7 +9,6 @@ router.post('/uploadpublication', async function(req, res) {
   var actualPublication = await publicationController.createPublication(publication)
   console.log(actualPublication)
   await userController.addPublicationToUser(user.id, actualPublication)
-  //const users = await userController.getAllUsers()
   await publicationController.addUserToPublication(actualPublication._id, user)
   req.flash('messageSuccess', 'La publicación se ha creado correctamente')
   res.redirect(req.get('referer'));

@@ -1,6 +1,8 @@
 var express = require('express');
 const passport = require('passport');
 var router = express.Router();
+const userController = require('../controllers/userController');
+
 
 router.get('/login', function(req, res, next) {
   res.render('user/login', {layout: false});
@@ -8,6 +10,11 @@ router.get('/login', function(req, res, next) {
 
 router.get('/register', function(req, res, next) {
   res.render('user/register', {layout: false})
+});
+
+router.get('/addfriends', async function(req, res, next) {
+  const users = await userController.getAllUsers()
+  res.render('user/addfriends', {users})
 });
 
 
