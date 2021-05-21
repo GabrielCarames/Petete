@@ -6,6 +6,7 @@
 }
 
 .addfriends .friend-menu {
+    grid-area: friend-menu;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 20%;

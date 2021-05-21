@@ -48,7 +48,7 @@ exports.getAllUsers = async () => {
 }
 
 exports.findByName = async (name) => {
-    return User.findOne({ 'name': name })
+    return User.find({ 'name': name }).lean()
 }
 
 exports.findByEmail = async (email) => {

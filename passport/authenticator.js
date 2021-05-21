@@ -12,11 +12,11 @@ passport.deserializeUser(async (id, done) => {
 }); 
 
 passport.use('register', new LocalStrategy({
-    usernameField: 'name',
+    usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
-}, async (req, name, password, done) => {
-    const targetUser = await userController.findByName(name)
+}, async (req, email, password, done) => {
+    const targetUser = await userController.findByEmail(email)
     if (targetUser) return done(null, false);
     else {
         const newUser = await userController.createUser(req.body)

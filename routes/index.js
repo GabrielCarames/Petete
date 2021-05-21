@@ -3,12 +3,13 @@ var router = express.Router();
 const publicationController = require('../controllers/publicationController');
 
 router.get('/', async function(req, res) {
-  var user = req.user
-  if(!user) {
+  var userLogged = req.user
+  if(!userLogged) {
     res.redirect('/user/login')
   } else {
+    console.log(userLogged)
     const publications = await publicationController.getAllPublications()
-    res.render('index', {publications});
+    res.render('index', {userLogged, publications});
   }
 });
 

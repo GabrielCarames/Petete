@@ -1,7 +1,6 @@
 <link rel='stylesheet' href='/css/index.css' />
 <script src="//momentjs.com/downloads/moment-with-locales.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
-<script src="/js/converter.js"></script>
 
 <title>Inicio</title>
 <div class="index">
@@ -10,7 +9,10 @@
     </div>
     <div class="publications-menu">
         <div class="upload-publication">
-            <img src="" alt="imagendeperfil">
+            <!--{{#each userLogged}}
+            <img  src="{{avatar}}" alt="imagendeperfil"> eh por que tengo que ahcer el foraeach si solo tiene un objeto el userlogged???????¡??¡?¡
+            {{/each}}-->
+            <img  src="{{avatar}}" alt="imagendeperfil">
             <input id="button" type="text" placeholder="¿Qué estás pensando?">
             <div id="modal" class="modal">
                 <div class="modal-content">
@@ -40,7 +42,7 @@
                             <div class="user-info">
                                 {{#each user}}
                                     {{name}} {{surname}} <br>hace {{converter ../this.createdAt}}
-                                {{/each}}  
+                                {{/each}} 
                             </div>
                         </div>
                         <div class="publication-description">
@@ -74,11 +76,5 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    }
-    function convertUntilNow(datetime){
-        moment.locale('es')
-        var time = moment(datetime);
-        var untilNow = time.fromNow(true);
-        return untilNow;
     }
 </script>
