@@ -13,11 +13,37 @@
         <div><i class="fas fa-pager"></i><a href="#">&nbspPáginas</a></div>
     </div>
     <div class="results">
+    {{#if result}}
         {{#each result}}
             <div class="result">
-                El nombre del pibe es {{name}}
-                el email es {{email}}
+                <div class="result-info">
+                    <div class="user-avatar">
+                        {{#each user}}
+                            <img src="{{avatar}}" alt="">
+                        {{/each}}  
+                    </div>
+                    <div class="user-info">
+                        {{#each user}}
+                            {{name}} {{surname}} <br>hace {{converter ../this.createdAt}}
+                        {{/each}} 
+                    </div>
+                </div>
+                <div class="result-action">
+                    <button>Confirmar</button>
+                    <button>Rechazar</button>
+                </div>
             </div>
         {{/each}}
+    {{else}}
+        <h1>No se encontraron personas con el nombre introducido.</h1>
+    {{/if}}
+                <h3>Personas</h3>
+                <div class="">
+
+                </div>
+                El nombre del pibe es {{name}}
+                el email es {{email}}
+           
+     
     </div>
 </div>

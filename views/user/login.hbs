@@ -11,7 +11,7 @@
             <input class="email" name="email" type="text" placeholder="Correo Electrónico" required>
             <input class="password" name="password" type="password" placeholder="Contraseña" required>
             <button class="submit" type="submit"><b>Ingresar</b></button>
-            <label class="forgotten"><a href="#"><b>¿Contraseña olvidada?</b></a></label>
+            <label class="forgotten"><a href="#" id="button">¿Contraseña olvidada?</a></label>
             <div class="divider"></div>
             <button class="register"><a href="/user/register"><b>Registro</b></a></button>
         </form>
@@ -19,4 +19,47 @@
     <div class="login-footer">
         Petete@Todos los derechos reservados
     </div>
+    <form name="contact" netlify>
+  <p>
+    <label>Name <input type="text" name="name" /></label>
+  </p>
+  <p>
+    <label>Email <input type="email" name="email" /></label>
+  </p>
+  <p>
+    <button type="submit">Send</button>
+  </p>
+</form>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <div class="title">    
+                        <span class="close">&times;</span>
+                        <h2>Cambiar contraseña</h2>
+                    </div>
+                    <form name="password-recovery" class="email" action="/user/sendemail" method="POST" id="upload-form" netlify data-netlify="true">
+                        <label>Recupera tu cuenta a través del código que enviarémos a tu dirección de correo electrónico.</label>
+                        <input value="password-recovery" name="text" type="text" placeholder="Correo electrónico"></input>
+                    </form>
+                    <div class="button">
+                        <button type="submit" form="upload-form" >Enviar código</button>
+                    </div>
+                </div>
+            </div>
 </div>
+
+<script>
+    var button = document.getElementById("button");
+    var modal = document.getElementById("modal");
+    var span = document.getElementsByClassName("close")[0];
+    button.onclick = function() {
+        modal.style.display = "block";
+    }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
