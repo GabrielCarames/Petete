@@ -2,6 +2,7 @@ var express = require('express');
 const passport = require('passport');
 var router = express.Router();
 const userController = require('../controllers/userController');
+const Notification = require('../models/notification');
 
 
 router.get('/login', function(req, res, next) {
@@ -17,6 +18,10 @@ router.get('/addfriends', async function(req, res, next) {
   res.render('user/addfriends', {users})
 });
 
+router.get('/logout', function (req, res) {
+  req.logout()
+  res.redirect('/')
+});
 
 router.post('/register', passport.authenticate('register',
   {
@@ -35,9 +40,25 @@ router.post('/login', passport.authenticate('login',
   }
 ));
 
-router.get('/logout', function (req, res) {
-  req.logout()
-  res.redirect('/')
+router.post('/addfriend/:userid', async function(req, res) {
+  const userIdToAdd = req.params.userid
+  const request = req.body.request
+  const userLogged = req.user[0]
+  console.log(request, userIdToAdd)
+  if(request == 'add'){ //che guerda que aca el userLogged le tuve que meter el [0] porque el passport de mierda me toma a user como un array
+      const newNotification = new Notification({
+        notificationRequest: request,
+        from: userLogged._id
+      })
+      newNotification.save()
+      await userController.sendNotificationToUser(userIdToAdd, newNotification)
+  }
+  /*if(request == 'refuse') {
+    para mucho despues esto me da paja
+    la idea es que al usuario logueado no se le muestre mas la sugerencia del amigo en concreto en esa pestaña
+  }*/
+  req.flash('messageSuccess', 'Se ha enviado una solicitud de amistad')
+  res.redirect(req.get('referer'));
 });
 
 module.exports = router;

@@ -16,6 +16,26 @@ exports.addPublicationToUser = async (userId, newPublication) => {
     )
 }
 
+exports.addFriendToUser = async (userLoggedId, userToAdd) => {
+    await User.findOneAndUpdate({ _id: userLoggedId },
+        {
+            $push: {
+                friends: userToAdd
+            }
+        }
+    )
+}
+
+exports.sendNotificationToUser = async (userIdToAdd, newNotification) => {
+    await User.findOneAndUpdate({ _id: userIdToAdd },
+        {
+            $push: {
+                notifications: newNotification
+            }
+        }
+    )
+}
+
 exports.createUser = async (values) => {
     const { name, surname, password, email, country, gender, age } = values
     const newUser = new User({ name, surname, password, email, country, gender, age })
@@ -37,14 +57,14 @@ exports.findById = async (id) => {
 }
 
 exports.getAllUsers = async () => {
-    return User.find({}).lean();
-};
-
-exports.getAllUsers = async () => {
     return await User.find().populate({
         path: 'publications',
         model: 'Publication'
     }).lean()
+}
+
+exports.findById = async (id) => {
+    return User.find({ '_id': id }).lean()
 }
 
 exports.findByName = async (name) => {
@@ -54,3 +74,4 @@ exports.findByName = async (name) => {
 exports.findByEmail = async (email) => {
     return User.findOne({ 'email': email })
 }
+

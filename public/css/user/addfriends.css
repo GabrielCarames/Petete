@@ -18,6 +18,7 @@
     color: white;
     overflow: scroll;
     overflow-x:hidden;
+    padding: 1em;
 }
 
 .friend-menu .friend-request {

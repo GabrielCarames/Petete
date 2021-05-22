@@ -20,16 +20,16 @@
                     <div class="user-avatar">
                         
                             <img src="{{avatar}}" alt="">
-                         
+                            {{_id}}
                     </div>
                     <div class="user-info">
                         {{name}} {{surname}}    
                     </div>
                 </div>
-                <div class="result-action">
-                    <button class="add">Añadir amigo</button>
-                    <button class="refuse">Rechazar</button>
-                </div>
+                <form class="result-action" action="/user/addfriend/{{_id}}" method="POST">
+                    <button name="request" value="add" class="add">Añadir amigo</button>
+                    <button name="request" value="refuse" class="refuse">Rechazar</button>
+                </form>
             </div>
         {{/each}}
     {{else}}

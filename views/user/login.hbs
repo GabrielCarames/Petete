@@ -30,21 +30,21 @@
     <button type="submit">Send</button>
   </p>
 </form>
-            <div id="modal" class="modal">
-                <div class="modal-content">
-                    <div class="title">    
-                        <span class="close">&times;</span>
-                        <h2>Cambiar contraseña</h2>
-                    </div>
-                    <form name="password-recovery" class="email" action="/user/sendemail" method="POST" id="upload-form" netlify data-netlify="true">
-                        <label>Recupera tu cuenta a través del código que enviarémos a tu dirección de correo electrónico.</label>
-                        <input value="password-recovery" name="text" type="text" placeholder="Correo electrónico"></input>
-                    </form>
-                    <div class="button">
-                        <button type="submit" form="upload-form" >Enviar código</button>
-                    </div>
-                </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="title">    
+                <span class="close">&times;</span>
+                <h2>Cambiar contraseña</h2>
             </div>
+            <form name="password-recovery" class="email" action="/user/sendemail" method="POST" id="upload-form" netlify data-netlify="true">
+                <label>Recupera tu cuenta a través del código que enviarémos a tu dirección de correo electrónico.</label>
+                <input value="password-recovery" name="text" type="text" placeholder="Correo electrónico"></input>
+            </form>
+            <div class="button">
+                <button type="submit" form="upload-form" >Enviar código</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
