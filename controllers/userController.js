@@ -46,12 +46,20 @@ exports.createUser = async (values) => {
 exports.findById = async (id) => {
     return User.findById(id).populate([
         {
-            path: 'weapons',
-            model: 'Weapon',
+            path: 'friends',
+            model: 'User'
+        },
+        {
+            path: 'notifications',
+            model: 'Notification',
             populate: {
                 path: 'from',
                 model: 'User'
             }
+        },
+        {
+            path: 'publications',
+            model: 'Publication'
         }
     ])
 }
@@ -63,9 +71,9 @@ exports.getAllUsers = async () => {
     }).lean()
 }
 
-exports.findById = async (id) => {
+/*exports.findById = async (id) => {
     return User.find({ '_id': id }).lean()
-}
+}*/
 
 exports.findByName = async (name) => {
     return User.find({ 'name': name }).lean()

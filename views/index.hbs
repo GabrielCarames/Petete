@@ -10,7 +10,11 @@
         </div>
         <div class="menu">
             <h1>Notificaciones</h1>
-            <p>hola</p>
+            {{#each userLogged.notifications}}
+                <div class="notification">
+                    {{notificationRequest}}
+                </div>
+            {{/each}}
         </div>
     </div>
 
