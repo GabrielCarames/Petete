@@ -17,7 +17,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-rows: 4em;
-    grid-template-areas: 'profile index searcher';
+    grid-template-areas: 'profile items searcher';
     align-items: center;
     justify-items: center;
     background-color: rgb(0, 48, 66);
@@ -31,8 +31,8 @@
     grid-area: profile;
 }
 
-.content .navbar .index{
-    grid-area: index;
+.content .navbar .items{
+    grid-area: items;
 }
 
 .content .navbar .searcher{
@@ -44,7 +44,7 @@
     text-decoration: none;
 }
 
-.navbar .index {
+.navbar .items {
     display: grid;
     grid-template-columns: 4em 4em 4em 4em;
     grid-template-rows: 2em;
@@ -53,11 +53,11 @@
     text-align: center;
 }
 
-.index a{
+.items a{
     padding: 10%;
 }
 
-.index a:hover {
+.items a:hover {
     background-color: rgb(0, 113, 158);
     transition: .000001s;
 }
@@ -83,9 +83,9 @@ body {
     .content .navbar {
         grid-template-columns: auto auto auto;
         grid-auto-rows: 4em;
-        grid-template-areas: 'profile index searcher';
+        grid-template-areas: 'profile items searcher';
     }
-    .navbar .index {
+    .navbar .items {
         display: grid;
         grid-template-columns: 1.5em 1.5em 1.5em 1.5em;
         grid-template-rows: 2em;
@@ -93,7 +93,7 @@ body {
         font-size: 1.8em;
         text-align: center;
     }
-    .index a {
+    .items a {
         padding: 10px 0px;
     }
     .searcher input {
@@ -110,16 +110,16 @@ body {
     .content .navbar {
         grid-template-columns: auto auto auto;
         grid-auto-rows: 4em;
-        grid-template-areas: 'profile index searcher';
+        grid-template-areas: 'profile items searcher';
     }
-    .navbar .index {
+    .navbar .items {
         grid-template-columns: 2em 2em 2em 2em;
         grid-template-rows: 2em;
         gap: 1em;
         font-size: 1.8em;
         text-align: center;
     }
-    .index a {
+    .items a {
         padding: 10px 0px;
     }
     .searcher input {
@@ -136,16 +136,16 @@ body {
     .content .navbar {
         grid-template-columns: 1fr 1fr 1fr;
         grid-auto-rows: 4em;
-        grid-template-areas: 'profile index searcher';
+        grid-template-areas: 'profile items searcher';
     }
-    .navbar .index {
+    .navbar .items {
         grid-template-columns: 2em 2em 2em 2em;
         grid-template-rows: 2em;
         gap: 1em;
         font-size: 1.8em;
         text-align: center;
     }
-    .index a {
+    .items a {
         padding: 10px 0px;
     }
 }

@@ -4,19 +4,26 @@
 
 <title>Inicio</title>
 <div class="index">
-    <div class="groups">
-
+    <div class="notifications">
+        <div class="notifications-button">
+            <span>&#9776;</span>
+        </div>
+        <div class="menu">
+            <h1>Notificaciones</h1>
+            <p>hola</p>
+        </div>
     </div>
+
     <div class="publications-menu">
         <div class="upload-publication">
             <!--{{#each userLogged}}
             <img  src="{{avatar}}" alt="imagendeperfil"> eh por que tengo que ahcer el foraeach si solo tiene un objeto el userlogged???????¡??¡?¡
             {{/each}}-->
-            <img  src="{{avatar}}" alt="imagendeperfil">
+            <img src="{{avatar}}" alt="imagendeperfil">
             <input id="button" type="text" placeholder="¿Qué estás pensando?">
             <div id="modal" class="modal">
                 <div class="modal-content">
-                    <div class="title">    
+                    <div class="title">
                         <span class="close">&times;</span>
                         <p>Crear publicación</p>
                     </div>
@@ -24,39 +31,39 @@
                         <textarea name="text" type="text" placeholder="¿Qué estás pensando?"></textarea>
                     </form>
                     <div class="button">
-                        <button type="submit" form="upload-form" >Publicar</button>
+                        <button type="submit" form="upload-form">Publicar</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="publications">
             {{#if publications}}
-                {{#each publications}}
-                    <div class="publication">
-                        <div class="publication-info">
-                            <div class="user-avatar">
-                                {{#each user}}
-                                    <img src="{{avatar}}" alt="">
-                                {{/each}}  
-                            </div>
-                            <div class="user-info">
-                                {{#each user}}
-                                    {{name}} {{surname}} <br>hace {{converter ../this.createdAt}}
-                                {{/each}} 
-                            </div>
-                        </div>
-                        <div class="publication-description">
-                            {{description}}
-                        </div>
+            {{#each publications}}
+            <div class="publication">
+                <div class="publication-info">
+                    <div class="user-avatar">
+                        {{#each user}}
+                        <img src="{{avatar}}" alt="">
+                        {{/each}}
                     </div>
-                {{/each}}
+                    <div class="user-info">
+                        {{#each user}}
+                        {{name}} {{surname}} <br>hace {{converter ../this.createdAt}}
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="publication-description">
+                    {{description}}
+                </div>
+            </div>
+            {{/each}}
             {{else}}
-                <h1>No hay publicaciones que mostrar, ¡Sé el primero!</h1>
+            <h1>No hay publicaciones que mostrar, ¡Sé el primero!</h1>
             {{/if}}
         </div>
     </div>
     <div class="friends">
-        
+
     </div>
 </div>
 
@@ -64,15 +71,20 @@
     var button = document.getElementById("button");
     var modal = document.getElementById("modal");
     var span = document.getElementsByClassName("close")[0];
-    button.onclick = function() {
+    button.onclick = function () {
         modal.style.display = "block";
     }
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = "none";
     }
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     }
+
+    const buttonToggle = document.querySelector('.notifications-button');
+    buttonToggle.addEventListener('click', function () {
+        document.querySelector('.notifications').classList.toggle('active');
+    });
 </script>
