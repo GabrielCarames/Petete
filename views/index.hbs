@@ -1,35 +1,60 @@
 <link rel='stylesheet' href='/css/index.css' />
 <script src="//momentjs.com/downloads/moment-with-locales.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+<script src="/try/examples/js/handlebars_helpers_if_eq.js"></script>
 <title>Inicio</title>
 <div class="index">
-    <div class="notifications">
+    <div class="notifications-panel">
         <div class="notifications-button">
             <span>&#9776;</span>
         </div>
         <div class="menu">
             <h1>Notificaciones</h1>
-            {{#each userLogged}}
-                {{notifications.notificationRequest}}
-                {{#each notifications}}
-                    <div class="notification">
-                        {{#each this}}
-                            {{_id}}
-                        {{/each}}
-                    </div>
+            <div class="notifications">
+                {{#each userLogged}}
+                    {{#each notifications}}
+                        <div class="notification">
+                            <div class="notification-info">
+                                <div class="user-avatar">         
+                                    <img src="{{../avatar}}" alt="">
+                                </div>
+                                <div class="user-info">
+                                    <p>El usuario
+                                    {{#each this}}
+                                        <!-- {{#ifEquals notificationRequest 'add'}} esto llama al helper que si anda
+                                            sosputo
+                                        {{/ifEquals}}-->
+                                        {{#each from}}
+                                            {{name}}
+                                        {{/each}}
+                                    {{/each}}
+                                    te ha enviado una solicitud de amistad
+                                    </p>
+                                    {{#this}}
+                                        Hace {{converter createdAt}}
+                                    {{/this}}
+                                </div>
+                            </div>
+                            <form class="notification-action" action="/user/addfriend/{{_id}}" method="POST">
+                                <button name="request" value="add" class="add">Añadir amigo</button>
+                                <button name="request" value="refuse" class="refuse">Rechazar</button>
+                            </form>
+                        </div>
+                    {{/each}}
                 {{/each}}
-            {{/each}}
-            
+            </div>
         </div>
     </div>
 
     <div class="publications-menu">
         <div class="upload-publication">
-            <!--{{#each userLogged}}
-            <img  src="{{avatar}}" alt="imagendeperfil"> eh por que tengo que ahcer el foraeach si solo tiene un objeto el userlogged???????¡??¡?¡
-            {{/each}}-->
-            <img src="{{avatar}}" alt="imagendeperfil">
+            {{#each userLogged}}
+            
+                    <img src="{{#avatar}} {{/avatar}}" alt="imagendeperfil">
+           
+            {{/each}}
+            
             <input id="button" type="text" placeholder="¿Qué estás pensando?">
             <div id="modal" class="modal">
                 <div class="modal-content">
@@ -101,7 +126,7 @@
 
     const buttonToggleNotifications = document.querySelector('.notifications-button');
     buttonToggleNotifications.addEventListener('click', function () {
-        document.querySelector('.notifications').classList.toggle('active');
+        document.querySelector('.notifications-panel').classList.toggle('active');
     });
 
     const buttonToggleFriends = document.querySelector('.friends-button');

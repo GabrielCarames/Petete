@@ -9,7 +9,6 @@ router.get('/', async function(req, res) {
     res.redirect('/user/login')
   } else {
     const publications = await publicationController.getAllPublications()
-    console.log(userLogged)
     res.render('index', {userLogged, publications});
   }
 });
