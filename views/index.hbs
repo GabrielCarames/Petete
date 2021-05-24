@@ -11,13 +11,16 @@
         <div class="menu">
             <h1>Notificaciones</h1>
             {{#each userLogged}}
-              
+                {{notifications.notificationRequest}}
                 {{#each notifications}}
                     <div class="notification">
-                        {{_id}}
+                        {{#each this}}
+                            {{_id}}
+                        {{/each}}
                     </div>
                 {{/each}}
             {{/each}}
+            
         </div>
     </div>
 
