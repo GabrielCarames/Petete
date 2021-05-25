@@ -61,4 +61,19 @@ router.post('/addfriend/:userid', async function(req, res) {
   res.redirect(req.get('referer'));
 });
 
+router.post('/acceptfriend/:notificationid', async function(req, res) {
+  const notificationid = req.params.notificationid
+  console.log(notificationid)
+});
+
+router.get('/getnotifications', userController.isAuthenticated, async function (req, res) {
+  const userId = req.user._id
+  const userNotifications = await userController.getNotifications(userId)
+  if(userNotifications.length){
+    res.send({status: true, userNotifications})
+  }else{
+    res.send({status: false, message: 'No tienes ninguna notificación.'})
+  }
+})
+
 module.exports = router;

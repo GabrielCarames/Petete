@@ -23,10 +23,16 @@ exports.addUserToPublication = async (publicationId, user) => {
 
 exports.getAllPublications = async () => {
   return await Publication.find().populate({
-      path: 'user',
-      model: 'User'
-  }).lean()
+    path: 'user',
+    model: 'User',
+    populate: {
+        path: 'from',
+        model: 'User'
+    }
+  })
 }
+
+
 
 exports.findPublicationById = async (id) => {
   return await Publication.findOne({_id: id})

@@ -14,4 +14,15 @@ router.post('/uploadpublication', async function(req, res) {
   res.redirect(req.get('referer'));
 });
 
+router.get('/getallpublications', userController.isAuthenticated, async function (req, res) {
+  const publications = await publicationController.getAllPublications()
+  console.log("reretet", publications)
+  if(publications.length){
+    console.log("sosbueno")
+    res.send({status: true, publications})
+  }else{
+    res.send({status: false, message: 'No hay ninguna publicación.'})
+  }
+})
+
 module.exports = router;

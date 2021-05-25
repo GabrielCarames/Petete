@@ -19,8 +19,7 @@ var app = express();
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
   partialsDir: __dirname + '/views/partials',
-  extname: '.hbs',
-  helpers: require('./config/functions')
+  extname: '.hbs'
 }));
 app.set('view engine', 'hbs');
 

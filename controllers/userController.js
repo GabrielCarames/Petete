@@ -83,3 +83,7 @@ exports.findByEmail = async (email) => {
     return User.findOne({ 'email': email })
 }
 
+exports.getNotifications = async (userId) => {
+    const user = await this.findById(userId)
+    return user.notifications
+}
