@@ -94,7 +94,7 @@
                                '<p> El usuario ' + this.from.name + ' te ha enviado una solicitud de amistad </p> Hace ' + convertDate(this.createdAt) +
                            '</div>'+
                        '</div>'+
-                       '<form class="notification-action" action="/user/acceptfriend/" method="POST">'+
+                       '<form class="notification-action" action="/user/acceptfriend/' + this._id + '/'+ this.from._id+'" method="POST">'+
                            '<button name="request" value="add" class="add">Añadir amigo</button>'+
                            '<button name="request" value="refuse" class="refuse">Rechazar</button>'+
                        '</form>'+
@@ -114,7 +114,7 @@
                             '<div class="user-avatar">'+
                                 '<img src="' + this.user[0].avatar + '" alt="">'+
                             '</div>'+
-                            '<div class="user-info">' + this.user[0].name + '<br>hace ' + convertDate(this.createdAt) +
+                            '<div class="user-info">' + this.user[0].name + ' ' + this.user[0].surname + '<br>hace ' + convertDate(this.createdAt) +
                             '</div>'+
                         '</div>'+
                         '<div class="publication-description">' + this.description +

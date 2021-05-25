@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const notificationController = require('../controllers/notificationController');
 
 exports.isAuthenticated = (req, res, next) => {
     if (req.isAuthenticated())
@@ -83,7 +84,18 @@ exports.findByEmail = async (email) => {
     return User.findOne({ 'email': email })
 }
 
-exports.getNotifications = async (userId) => {
-    const user = await this.findById(userId)
-    return user.notifications
+exports.acceptFriendRequest = async (userId, fromId, notificationId) => {
+    await notificationController.removeNotification(userId, notificationId)
+    await this.addNewFriend(userId, fromId)
+    await this.addNewFriend(fromId, userId)
+}
+
+exports.addNewFriend = async (userId, newFriend) => {
+    await User.findOneAndUpdate({ _id: userId },
+        {
+            $push: {
+                friends: newFriend
+            }
+        }
+    )
 }

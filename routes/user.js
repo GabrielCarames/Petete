@@ -2,6 +2,7 @@ var express = require('express');
 const passport = require('passport');
 var router = express.Router();
 const userController = require('../controllers/userController');
+const notificationController = require('../controllers/notificationController');
 const Notification = require('../models/notification');
 
 
@@ -43,7 +44,7 @@ router.post('/login', passport.authenticate('login',
 router.post('/addfriend/:userid', async function(req, res) {
   const userIdToAdd = req.params.userid
   const request = req.body.request
-  const userLogged = req.user[0]
+  const userLogged = req.user
   console.log(request, userIdToAdd)
   if(request == 'add'){ //che guerda que aca el userLogged le tuve que meter el [0] porque el passport de mierda me toma a user como un array
       const newNotification = new Notification({
@@ -61,19 +62,24 @@ router.post('/addfriend/:userid', async function(req, res) {
   res.redirect(req.get('referer'));
 });
 
-router.post('/acceptfriend/:notificationid', async function(req, res) {
-  const notificationid = req.params.notificationid
-  console.log(notificationid)
-});
 
 router.get('/getnotifications', userController.isAuthenticated, async function (req, res) {
   const userId = req.user._id
-  const userNotifications = await userController.getNotifications(userId)
+  const userNotifications = await notificationController.getNotifications(userId)
   if(userNotifications.length){
     res.send({status: true, userNotifications})
   }else{
     res.send({status: false, message: 'No tienes ninguna notificación.'})
   }
 })
+
+router.post('/acceptfriend/:notificationid/:fromid', async function(req, res) {
+  const notificationId = req.params.notificationid
+  const fromId = req.params.fromid
+  const userId = req.user._id
+  await userController.acceptFriendRequest(userId, fromId, notificationId)
+  req.flash('messageSuccess', 'Se ha agregado el amigo satisfactoriamente.')
+  res.redirect(req.get('referer'));
+});
 
 module.exports = router;
