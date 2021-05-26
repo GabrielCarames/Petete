@@ -9,17 +9,33 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="/css/normalize.css" />
     <link rel="stylesheet" href="/css/layout/main.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/20e44dbf94.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
 </head>
 
 <body>
     <div class="content">
         <div class="navbar">
-            <div class="profile">
-                <img src="{{avatar}}" alt="">
-                <a href="#">{{name}}</a>
+            <div class="user-panel">
+                <div class="user-items">
+                    <div class="user-options-button"> 
+                        <span><i class="fas fa-arrow-circle-down"></i></span>
+                    </div>
+                    <img src="{{avatar}}" alt="">
+                    <a href="#">{{name}}</a>
+                </div>
+                <div class="user-options">
+                    <div class="user-avatar">
+                        <img src="{{avatar}}" alt="">
+                        <a href="#">{{name}}</a>
+                    </div>
+                    <div class="options">
+                        <a href=""><button>COnfiguracion</button></a>
+                        <a href=""><button>COnfiguracion</button></a>
+                        <a href=""><button>COnfiguracion</button></a>
+                    </div>
+                </div>
             </div>
             <div class="items">
                 <a class="navbar-href" href="/"><i class="fas fa-home"></i></a>
@@ -44,6 +60,7 @@
             {{{body}}}
         </div>
     </div>
+ 
 </body>
 
 </html>
@@ -51,6 +68,7 @@
 <script>
     let prevDiv;
     const buttonToggle = document.querySelector('.searcher-button');
+
     buttonToggle.addEventListener('click', function () {
         document.querySelector('.hidden-searcher').classList.toggle('active');
     });
@@ -60,4 +78,5 @@
         $(this).addClass('border');
         prevDiv = $(this);
     });
+    
 </script>

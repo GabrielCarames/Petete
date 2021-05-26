@@ -3,7 +3,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 <script src="/js/converter.js"></script>
-<script src="//momentjs.com/downloads/moment-with-locales.js"></script>
 
 <title>Inicio</title>
 <div class="index">
@@ -54,6 +53,7 @@
     </div>
 </div>
 
+
 <script>
     var button = document.getElementById("button");
     var modal = document.getElementById("modal");
@@ -73,6 +73,13 @@
             modal.style.display = "none";
         }
     }
+
+    //este boton de aca corresponde al user-options del navbar. si lo pongo en el main.hbs no funciona, en cambio aca si.
+    const buttonToggleUserOptions = document.querySelector('.user-options-button');
+    buttonToggleUserOptions.addEventListener('click', function () {
+        console.log("me diste clcik si")
+        document.querySelector('.user-options').classList.toggle('active');
+    });
 
     const buttonToggleNotifications = document.querySelector('.notifications-button');
     buttonToggleNotifications.addEventListener('click', function () {
