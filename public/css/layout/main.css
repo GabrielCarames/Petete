@@ -27,21 +27,30 @@
     color: rgb(255, 255, 255);
 }
 
-.content .navbar .profile{
+.content .navbar .profile {
     grid-area: profile;
+    display: grid;
+    grid-template-columns: 8% 1fr;
+    align-items: center;
 }
 
-.content .navbar .items{
+.navbar .profile img{
+    width: 100%;
+    height: auto;
+}
+
+.navbar .profile a {
+    font-size: 1.5em;
+    text-decoration: none;
+    margin: .5em;
+}
+
+.content .navbar .items {
     grid-area: items;
 }
 
-.content .navbar .searcher{
+.content .navbar .searcher {
     grid-area: searcher;
-}
-
-.navbar .profile a{
-    font-size: 1.5em;
-    text-decoration: none;
 }
 
 .navbar .items {

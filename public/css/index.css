@@ -29,7 +29,7 @@
 }
 
 .notifications-panel.active {
-    left: -24em;
+    left: -24.7em;
 }
 
 .notifications-panel .menu {
@@ -107,8 +107,7 @@
     height: auto;
 }
 
-
-  .index .friends {
+.index .friends {
     grid-area: friends;
     grid-template-columns: 100%;
     z-index: 1000;
@@ -118,27 +117,27 @@
     transition: all 400ms linear;
     background-color: rgb(0, 48, 66);
     color: white;
-  }
-  
-  .friends-button {
+}
+
+.friends-button {
     position: absolute;
     cursor: pointer;
     right: 25em;
-  }
-  
-  .friends-button span{
+}
+
+.friends-button span{
     font-size: 30px;
-  }
-  
-  .friends.active {
-    left: 24em;
-  }
-  
-  .friends .menu {
+}
+
+.friends.active {
+    left: 24.7em;
+}
+
+.friends .menu {
     display: grid;
     grid-template-columns: auto;
     grid-auto-rows: 4em 1fr;
-  }
+}
 
 .publications-menu {
     grid-area: publications-menu;
