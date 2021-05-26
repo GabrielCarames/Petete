@@ -16,6 +16,7 @@ router.post('/uploadpublication', async function(req, res) {
 
 router.get('/getallpublications', userController.isAuthenticated, async function (req, res) {
   const publications = await publicationController.getAllPublications()
+  console.log(publications)
   if(publications.length){
     res.send({status: true, publications})
   }else{

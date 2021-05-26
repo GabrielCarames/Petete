@@ -2,6 +2,7 @@
 <script src="//momentjs.com/downloads/moment-with-locales.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="//momentjs.com/downloads/moment-with-locales.js"></script>
 <script src="/js/converter.js"></script>
 
 <title>Inicio</title>
@@ -101,7 +102,7 @@
                                '<img src="' + this.from.avatar + '" alt="">'+
                            '</div>'+
                            '<div class="user-info">'+
-                               '<p> El usuario ' + this.from.name + ' te ha enviado una solicitud de amistad </p> Hace ' + convertDate(this.createdAt) +
+                               '<p> El usuario ' + this.from.name + ' te ha enviado una solicitud de amistad </p> Hace ' +
                            '</div>'+
                        '</div>'+
                        '<form class="notification-action" action="/user/acceptfriend/' + this._id + '/'+ this.from._id+'" method="POST">'+
@@ -118,18 +119,20 @@
     $.get("http://localhost:3000/publications/getallpublications", data => {
         if (data.status) {
             $.each(data.publications, function () {
+                console.log(this.user[0].avatar)
+                console.log(this.user[0].name)
                 publications.innerHTML +=       
-                   '<div class="publication">'+
-                        '<div class="publication-info">'+
-                            '<div class="user-avatar">'+
-                                '<img src="' + this.user[0].avatar + '" alt="">'+
-                            '</div>'+
-                            '<div class="user-info">' + this.user[0].name + ' ' + this.user[0].surname + '<br>hace ' + convertDate(this.createdAt) +
-                            '</div>'+
+                '<div class="publication">'+
+                    '<div class="publication-info">'+
+                        '<div class="user-avatar">'+
+                            '<img src="' + this.user[0].avatar + '" alt="">'+
                         '</div>'+
+                        '<div class="user-info">' + this.user[0].name + ' ' + this.user[0].surname + '<br>hace ' + convertDate(this.user[0].createdAt) +
+                        '</div>'+
+                    '</div>'+
                         '<div class="publication-description">' + this.description +
-                        '</div>'+
-                    '</div>'
+                    '</div>'+
+                '</div>'
             })
         } else {
             publications.innerHTML = data.message
