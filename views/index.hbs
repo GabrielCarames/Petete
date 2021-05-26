@@ -41,13 +41,15 @@
             
         </div>
     </div>
-    <div class="friends">
+    <div class="friends-panel">
         <div class="friends-button">
             <span>&#9776;</span>
         </div>
         <div class="menu">
             <h1>Amigos</h1>
-            
+            <div id="friends" class="friends">
+                
+            </div>
         </div>
     </div>
 </div>
@@ -58,6 +60,7 @@
     var span = document.getElementsByClassName("close")[0];
     var notifications = document.getElementById('notifications')
     var publications = document.getElementById('publications')
+    var friends = document.getElementById('friends')
 
     button.onclick = function () {
         modal.style.display = "block";
@@ -78,7 +81,7 @@
 
     const buttonToggleFriends = document.querySelector('.friends-button');
     buttonToggleFriends.addEventListener('click', function () {
-        document.querySelector('.friends').classList.toggle('active');
+        document.querySelector('.friends-panel').classList.toggle('active');
     });
 
     $.get("http://localhost:3000/user/getnotifications", data => {
@@ -126,5 +129,23 @@
         }
     });
 
-    
+    $.get("http://localhost:3000/user/getalluserfriends", data => {
+        if (data.status) {
+            $.each(data.friends, function () {
+                friends.innerHTML +=       
+                   '<div class="friend">'+
+                        '<div class="friend-info">'+
+                            '<div class="user-avatar">'+
+                                '<img src="' + this.avatar + '" alt="">'+
+                            '</div>'+
+                            '<div class="user-info">' + this.name + ' ' + this.surname +
+                            '</div>'+
+                        '</div>'+
+                    '</div>'
+            })
+        } else {
+            friends.innerHTML = data.message
+        }
+    });
+
 </script>

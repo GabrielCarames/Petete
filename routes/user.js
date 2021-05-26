@@ -5,7 +5,6 @@ const userController = require('../controllers/userController');
 const notificationController = require('../controllers/notificationController');
 const Notification = require('../models/notification');
 
-
 router.get('/login', function(req, res, next) {
   res.render('user/login', {layout: false});
 });
@@ -72,6 +71,16 @@ router.get('/getnotifications', userController.isAuthenticated, async function (
     res.send({status: false, message: 'No tienes ninguna notificación.'})
   }
 })
+
+router.get('/getalluserfriends', async function(req, res, next) {
+  const userId = req.user._id
+  const friends = await userController.getAllUserFriends(userId)
+  if(friends.length){
+    res.send({status: true, friends})
+  }else{
+    res.send({status: false, message: 'No tienes agregado a ningún amigo.'})
+  }
+});
 
 router.post('/acceptfriend/:notificationid/:fromid', async function(req, res) {
   const notificationId = req.params.notificationid

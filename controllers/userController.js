@@ -72,6 +72,11 @@ exports.getAllUsers = async () => {
     }).lean()
 }
 
+exports.getAllUserFriends = async (userId) => {
+    const user = await this.findById(userId)
+    return user.friends
+}
+
 /*exports.findById = async (id) => {
     return User.find({ '_id': id }).lean()
 }*/
