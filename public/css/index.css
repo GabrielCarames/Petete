@@ -233,7 +233,7 @@
     padding: .5em;
 }
 
-.publications-menu .upload-publication, .publications-menu .publications {
+.publications-menu .upload-publication, .publications-menu .publication {
     border-radius: 10px;
 }
 
@@ -378,4 +378,63 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.chats {
+    display: grid;
+    grid-template-columns: 1fr;
+    position: sticky;
+    z-index: 2000;
+    bottom: 0;
+    left: 0em;
+    gap: 1em;
+    justify-items: right;
+    padding-right: 1em;
+}
+
+.chat {
+    display: grid;
+    grid-template-columns: 20em;
+    grid-template-rows: 2.5em 10em 2em;
+    grid-template-areas: 'chat-index' 'chat-messages' 'chat-options';
+    padding: 1em;
+    background-color: rgb(29, 75, 92);
+    color: #fff;
+    border-radius: 5px;
+}
+
+.chat .chat-index {
+    grid-area: chat-index;
+    border-bottom: 2px solid rgb(100, 114, 119);
+    display: grid;
+    grid-template-columns: 10% 75% 10% 10%;
+}
+
+.chat-index a {
+    color: white;
+    text-decoration: none;
+    margin: .3em;
+}
+
+.chat-index .close {
+    color: white;
+}
+
+.chat-index .minimize {
+    font-size: 30;
+    color: white;
+}
+
+.chat-index img {
+    width: 100%;
+    height: auto;
+}
+
+.chat .chat-messages {
+    grid-area: chat-messages;
+    
+}
+
+.chat .chat-options {
+    grid-area: chat-options;
 }
