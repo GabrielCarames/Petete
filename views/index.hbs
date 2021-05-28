@@ -4,6 +4,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 <script src="//momentjs.com/downloads/moment-with-locales.js"></script>
 <script src="/js/converter.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
 
 <title>Inicio</title>
 <div class="index">
@@ -65,19 +67,25 @@
             tachncak
         </div>
         <div class="chat-options">
-osos
+            <input id="messageToSend" type="text" placeholder="Enviar mensaje">
         </div>
     </div>
 </div>
 
 
 <script>
+    var socket = io();
     var button = document.getElementById("button");
     var modal = document.getElementById("modal");
     var span = document.getElementsByClassName("close")[0];
     var notifications = document.getElementById('notifications')
     var publications = document.getElementById('publications')
     var friends = document.getElementById('friends')
+
+    
+    
+    var message = document.getElementById('messageToSend');
+
 
     button.onclick = function () {
         modal.style.display = "block";
@@ -94,7 +102,6 @@ osos
     //este boton de aca corresponde al user-options del navbar. si lo pongo en el main.hbs no funciona, en cambio aca si.
     const buttonToggleUserOptions = document.querySelector('.user-options-button');
     buttonToggleUserOptions.addEventListener('click', function () {
-        console.log("me diste clcik si")
         document.querySelector('.user-options').classList.toggle('active');
     });
 
@@ -174,4 +181,76 @@ osos
         }
     });
 
+    //<--------------------------------------------------------------------Socket.io---------------------------------------------------------------------->
+    // Envia al server que el usuario se conecto
+    socket.emit('connected')
+    
+    //Si el usuario toca el enter se llama a la función para enviar el mensaje
+    message.addEventListener('keypress', function () {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            sendMessage();
+        }
+    });
+
+    // Cuando un usuario envia un mensaje, se emite esta accion con el nombre y el mensaje del usuario al servidor
+    function sendMessage() {
+        if (message.value) {
+            socket.emit('message', {
+                message: message.value,
+                username: username
+            });
+            message.value = '';
+        } else {
+            alert("Escribe algo para enviar")
+        }
+    }
+
+    // Recibe y muestra la conexion de un usuario
+    socket.once('userconnect', function (username) {
+        messages.innerHTML += '<p>' + username + ' se ha conectado</p>'
+    })
+
+    function insertMessages(message) {
+        
+        messageId = message._id
+        console.log(message.message)
+        messageContent= message.message
+        messages.innerHTML += '<div id="' + messageId +'">'
+        messageDiv = document.getElementById(messageId);
+        messageDiv.innerHTML += 
+            '<div>' +
+                '<p>' + message.message + '</p>' +
+                '<div id="'+messageId+'"><br></div>' +
+            '</div>'
+    }
+
+    // Recibe y mustra el historial de mensajes
+    socket.on('chathistory', function (messages) {
+        $.each(messages, function () {
+            insertMessages(this)
+        })
+        
+    })
+
+    // Recibe y muestra la desconexion de un usuario
+    socket.on('userdisconnect', function (username) {
+        messages.innerHTML += '<p>' + username + ' se ha desconectado</p>'
+    })
+
+    // Si el usuario esta escribiendo se le informa al servidor
+    message.addEventListener('keypress', function () {
+        socket.emit('typing', username)
+    });
+
+    // Recibe y muestra cuando el usuario esta escribiendo
+    socket.on('typing', function (data) {
+        //nadatodavia
+    });
+
+    // Recibe y muestra el mensaje del usuario
+    socket.on('message', function (data) {
+        
+        insertMessages(data)
+    });
 </script>

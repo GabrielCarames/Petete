@@ -44,7 +44,6 @@ router.post('/addfriend/:userid', async function(req, res) {
   const userIdToAdd = req.params.userid
   const request = req.body.request
   const userLogged = req.user
-  console.log(request, userIdToAdd)
   if(request == 'add'){ //che guerda que aca el userLogged le tuve que meter el [0] porque el passport de mierda me toma a user como un array
       const newNotification = new Notification({
         notificationRequest: request,
