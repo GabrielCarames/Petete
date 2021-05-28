@@ -18,8 +18,8 @@ module.exports = (io) => {
         socket.username = username
         socket.broadcast.emit('userconnect', username)
       }
-      var messages = await chatController.getAllMessages(chatId);
-      socket.emit("chathistory", messages)
+      //var messages = await chatController.getAllMessages(chatId);
+      //socket.emit("chathistory", messages)
     
     })
 

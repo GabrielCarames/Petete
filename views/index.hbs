@@ -55,21 +55,8 @@
         </div>
     </div>
 </div>
-<div class="chats">
-    <div class="chat">
-        <div class="chat-index">
-            <img src="{{avatar}}" alt="">
-            <a href="#">{{name}}</a>
-            <span class="minimize">&minus;</span>
-            <span class="close">&times;</span>
-        </div>
-        <div class="chat-messages">
-            tachncak
-        </div>
-        <div class="chat-options">
-            <input id="messageToSend" type="text" placeholder="Enviar mensaje">
-        </div>
-    </div>
+<div id="chats" class="chats">
+    
 </div>
 
 
@@ -81,6 +68,7 @@
     var notifications = document.getElementById('notifications')
     var publications = document.getElementById('publications')
     var friends = document.getElementById('friends')
+    var chats = document.getElementById('chats')
 
     
     
@@ -140,6 +128,7 @@
     });
 
     $.get("http://localhost:3000/publications/getallpublications", data => {
+        console.log(data)
         if (data.status) {
             $.each(data.publications, function () {
                 console.log(this.user[0].avatar)
@@ -181,17 +170,39 @@
         }
     });
 
+    $.get("http://localhost:3000/chat/getallchats", data => {
+        const allChats = data
+        console.log(allChats)
+        console.log(allChats[0].users[0].name)
+        $.each(allChats, function () {
+            chats.innerHTML +=    
+                '<div class="chat" id="'+ this._id +'">'+
+                    '<div class="chat-index">'+
+                        '<img src="" alt="">'+
+                        '<a href="#">'+ this.users[0].name +'</a>'+
+                        '<span class="minimize">&minus;</span>'+
+                        '<span class="close">&times;</span>'+
+                    '</div>'+
+                    '<div class="chat-messages">'+ this.messages+
+                    '</div>'+
+                    '<div class="chat-options">'+
+                        '<input id="messageToSend" type="text" placeholder="Enviar mensaje">'+
+                    '</div>'+
+                '</div>'
+        })
+    });
+
     //<--------------------------------------------------------------------Socket.io---------------------------------------------------------------------->
     // Envia al server que el usuario se conecto
     socket.emit('connected')
     
     //Si el usuario toca el enter se llama a la función para enviar el mensaje
-    message.addEventListener('keypress', function () {
+    /*message.addEventListener('keypress', function () {
         if (event.keyCode === 13) {
             event.preventDefault();
             sendMessage();
         }
-    });
+    });*/
 
     // Cuando un usuario envia un mensaje, se emite esta accion con el nombre y el mensaje del usuario al servidor
     function sendMessage() {
@@ -239,9 +250,9 @@
     })
 
     // Si el usuario esta escribiendo se le informa al servidor
-    message.addEventListener('keypress', function () {
+    /*message.addEventListener('keypress', function () {
         socket.emit('typing', username)
-    });
+    });*/
 
     // Recibe y muestra cuando el usuario esta escribiendo
     socket.on('typing', function (data) {

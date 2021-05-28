@@ -39,8 +39,19 @@ exports.getAllGroups = async () => {
     })
 }
 
+exports.getAllChats = async () => {
+    return await Chat.find({ 
+        chatType: 'private',
+    }).populate({
+        path: 'users',
+        model: 'User'
+    }).populate({
+        path: 'messages',
+        model: 'Message'
+    })
+}
+
 exports.getAllUsersGroup = async (name) => {
-   
     return await Chat.findOne({ 
         name: name
     }, users)

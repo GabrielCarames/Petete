@@ -4,6 +4,8 @@ var router = express.Router();
 const userController = require('../controllers/userController');
 const notificationController = require('../controllers/notificationController');
 const Notification = require('../models/notification');
+const chatController = require('../controllers/chatController');
+
 
 router.get('/login', function(req, res, next) {
   res.render('user/login', {layout: false});
@@ -50,6 +52,8 @@ router.post('/addfriend/:userid', async function(req, res) {
         from: userLogged._id
       })
       newNotification.save()
+      const userFriend = await userController.findById(userIdToAdd)
+      await chatController.createPrivateChat(userLogged, userFriend)
       await userController.sendNotificationToUser(userIdToAdd, newNotification)
   }
   /*if(request == 'refuse') {
