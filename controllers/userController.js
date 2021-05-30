@@ -65,6 +65,11 @@ exports.findById = async (id) => {
     ])
 }
 
+exports.getUserLogged = () => {
+    const userLogged = req.user
+    return userLogged
+}
+
 exports.getAllUsers = async () => {
     return await User.find().populate({
         path: 'publications',

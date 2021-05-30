@@ -7,11 +7,7 @@ exports.getAllMessages = async () => {
 }
 
 exports.createAndSaveMessage = async (data) => {
-    const {message, username} = data
-
-    // encuentra al usuario por su username
-    const user = await userController.findByUsername(username);
-
+    const {message, user} = data
     const newMessage = new Message({message, user})
     await newMessage.save();
     return newMessage

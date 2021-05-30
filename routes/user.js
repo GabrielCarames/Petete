@@ -94,4 +94,9 @@ router.post('/acceptfriend/:notificationid/:fromid', async function(req, res) {
   res.redirect(req.get('referer'));
 });
 
+router.get('/getuserlogged', async function (req, res) {
+  const userLogged = req.user
+  res.send(userLogged)
+})
+
 module.exports = router;

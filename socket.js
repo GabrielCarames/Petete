@@ -6,17 +6,18 @@ const userController = require('./controllers/userController');
 module.exports = (io) => {
   users = []
   var userRepeat
+  var currentlyChat
   io.on('connection', (socket) => {
-    socket.on('connected', async (username) => {
+    socket.on('connected', async (userLogged, chatId) => {
       console.log("esa entre")
-
+      currentlyChat = chatId
       userRepeat = users.find(user => {
-        return user == username
+        return user == userLogged.name
       })
       if (!userRepeat) {
-        users.push(username)
-        socket.username = username
-        socket.broadcast.emit('userconnect', username)
+        users.push(userLogged.name)
+        socket.name = userLogged.name
+        socket.broadcast.emit('userconnect', userLogged.name)
       }
       //var messages = await chatController.getAllMessages(chatId);
       //socket.emit("chathistory", messages)
@@ -25,6 +26,7 @@ module.exports = (io) => {
 
     // Recibe y envia al cliente el mensaje del usuario
     socket.on('message', async (data) => {
+      console.log('enviaste este mensaje', data)
       const newMessage = await messageController.createAndSaveMessage(data)
       await chatController.addNewMessage(currentlyChat, newMessage._id)
       io.emit('message', newMessage);
@@ -38,7 +40,7 @@ module.exports = (io) => {
     // Recibe y envia que un usuario se desconecto
 
     socket.on('disconnect', () => {
-      io.emit('userdisconnect', socket.username)
+      io.emit('userdisconnect', socket.name)
     })
   });
 }

@@ -69,11 +69,7 @@
     var publications = document.getElementById('publications')
     var friends = document.getElementById('friends')
     var chats = document.getElementById('chats')
-
-    
-    
-    var message = document.getElementById('messageToSend');
-
+    var userLogged
 
     button.onclick = function () {
         modal.style.display = "block";
@@ -103,6 +99,10 @@
         document.querySelector('.friends-panel').classList.toggle('active');
     });
 
+    $.get("http://localhost:3000/user/getuserlogged", data => {
+        userLogged = data
+    });
+
     $.get("http://localhost:3000/user/getnotifications", data => {
         if (data.status) {
             $.each(data.userNotifications, function () {
@@ -128,11 +128,8 @@
     });
 
     $.get("http://localhost:3000/publications/getallpublications", data => {
-        console.log(data)
         if (data.status) {
             $.each(data.publications, function () {
-                console.log(this.user[0].avatar)
-                console.log(this.user[0].name)
                 publications.innerHTML +=       
                 '<div class="publication">'+
                     '<div class="publication-info">'+
@@ -172,10 +169,16 @@
 
     $.get("http://localhost:3000/chat/getallchats", data => {
         const allChats = data
-        console.log(allChats)
-        console.log(allChats[0].users[0].name)
+        /*for (let chat in allChats) {
+            var id = allChats[chat]._id
+            console.log(typeof id) 
+            chats.innerHTML +=
+            '<input id="messageToSend" type="text" placeholder="Enviar mensaje"  onclick="cliq(\''+id+'\')">'
+
+        }*/
+        
         $.each(allChats, function () {
-            chats.innerHTML +=    
+            chats.innerHTML +=
                 '<div class="chat" id="'+ this._id +'">'+
                     '<div class="chat-index">'+
                         '<img src="" alt="">'+
@@ -186,32 +189,44 @@
                     '<div class="chat-messages">'+ this.messages+
                     '</div>'+
                     '<div class="chat-options">'+
-                        '<input id="messageToSend" type="text" placeholder="Enviar mensaje">'+
+                        console.log(this)+
+                        console.log(this._id)+
+                        '<input type="text" placeholder="Enviar mensaje" onclick="cliq(\''+this._id+'\')">'+
                     '</div>'+
                 '</div>'
         })
     });
 
+    function cliq(chatId) { //fijate que no se peuda enviar un string vacio
+        console.log(chatId)
+        var chat = document.getElementById(chatId).children;
+        console.log("esa soy yo xaSDasdsad", chat)
+        console.log(chat[2].children[0].value); //dentro del chat, se dirige a su tercer hijo de div="options" y luego al hijo de ese options el cual es el input
+        var selectedInput = chat[2].children[0]
+        selectedInput.addEventListener('keypress', function () {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                sendMessage(selectedInput.value);
+            }
+        });
+    }
+
     //<--------------------------------------------------------------------Socket.io---------------------------------------------------------------------->
     // Envia al server que el usuario se conecto
-    socket.emit('connected')
+    socket.emit('connected', userLogged, chatId) //                                ACA PASARLE EL CHATID DE LAGUNA MANERA
     
+    var a = document.getElementById('messageToSend');
     //Si el usuario toca el enter se llama a la función para enviar el mensaje
-    /*message.addEventListener('keypress', function () {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            sendMessage();
-        }
-    });*/
+    
 
     // Cuando un usuario envia un mensaje, se emite esta accion con el nombre y el mensaje del usuario al servidor
-    function sendMessage() {
-        if (message.value) {
+    function sendMessage(message) {
+        if (message) {
             socket.emit('message', {
-                message: message.value,
-                username: username
+                message: message,
+                user: userLogged
             });
-            message.value = '';
+            message = '';
         } else {
             alert("Escribe algo para enviar")
         }
