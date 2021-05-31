@@ -169,24 +169,17 @@
     });
 
     function displayfriendchat(friendId) {
-        console.log("acatoy")
-        var cosa = $.get("http://localhost:3000/chat/getfriendchat/" + friendId)
-        /*var chat = document.getElementById(chatId).children;
-        var selectedInput = chat[2].children[0]
-        document.getElementById().getElementsByClassName('chat')
-        document.getElementById(friendId).classList.toggle('active');*/
+        console.log(friendId)
+        $.get("http://localhost:3000/chat/getfriendchat/" + friendId, data => {
+            var friendChat = null
+            friendChat = data
+            console.log(friendChat)
+            document.getElementById(friendChat._id).classList.toggle('active');
+        })
     }
 
     $.get("http://localhost:3000/chat/getallchats", data => {
-        const allChats = data
-        /*for (let chat in allChats) {
-            var id = allChats[chat]._id
-            console.log(typeof id) 
-            chats.innerHTML +=
-            '<input id="messageToSend" type="text" placeholder="Enviar mensaje"  onclick="cliq(\''+id+'\')">'
-
-        }*/
-        
+        const allChats = data 
         $.each(allChats, function () {
             chats.innerHTML +=
                 '<div class="chat" id="'+ this._id +'">'+
@@ -241,13 +234,11 @@
     // Recibe y muestra la conexion de un usuario
     socket.once('userconnect', function (username) {
         chatMessages = document.getElementsByClassName('chat-messages');
-        console.log('hioa', chatMessages)
         chatMessages.innerHTML += '<p>' + username + ' se ha conectado</p>'
     })
 
     function insertMessages(message) {
         var messageId = message._id
-        console.log(messageId)
         chatMessages.innerHTML += '<div id="' + messageId +'">'
         messageDiv = document.getElementById(messageId);
         messageDiv.innerHTML += 

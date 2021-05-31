@@ -395,7 +395,7 @@
 }
 
 .chat {
-    display: grid;
+    display: none;
     grid-template-columns: 20em;
     grid-template-rows: 2.5em 10em 2em;
     grid-template-areas: 'chat-index' 'chat-messages' 'chat-options';
@@ -403,7 +403,10 @@
     background-color: rgb(29, 75, 92);
     color: #fff;
     border-radius: 5px;
-    display: none;
+}
+
+.chat.active {
+    display: grid;
 }
 
 .chat .chat-index {
