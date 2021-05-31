@@ -440,7 +440,8 @@
 
 .chat .chat-messages {
     grid-area: chat-messages;
-    
+    overflow: auto;
+    display: grid;
 }
 
 .chat .chat-options {

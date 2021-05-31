@@ -6,31 +6,30 @@ const userController = require('./controllers/userController');
 module.exports = (io) => {
   users = []
   var userRepeat
-  var currentlyChat
+  var currentlyChatId
   io.on('connection', (socket) => {
     socket.on('connected', async (userLogged, chatId) => {
-      console.log("esa entre")
-      currentlyChat = chatId
+      currentlyChatId = chatId
       userRepeat = users.find(user => {
         return user == userLogged.name
       })
       if (!userRepeat) {
         users.push(userLogged.name)
         socket.name = userLogged.name
-        socket.broadcast.emit('userconnect', userLogged.name)
+        socket.broadcast.emit('userconnect', currentlyChatId)
       }
-      var messages = await chatController.getAllMessages(currentlyChat);
-      socket.emit("chathistory", messages)
+      console.log(currentlyChatId)
+      var messages = await chatController.getAllMessages(currentlyChatId);
+      console.log(messages)
+      socket.emit("chathistory", currentlyChatId, messages)
     
     })
 
     // Recibe y envia al cliente el mensaje del usuario
     socket.on('message', async (data) => {
-      console.log('enviaste este mensaje', data)
       const newMessage = await messageController.createAndSaveMessage(data)
-      console.log(currentlyChat)
-      await chatController.addNewMessage(currentlyChat, newMessage._id)
-      io.emit('message', newMessage);
+      await chatController.addNewMessage(currentlyChatId, newMessage._id)
+      io.emit('message', currentlyChatId, newMessage);
     });
 
     // Recibe y envia que un usuario esta escribiendo

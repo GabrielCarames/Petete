@@ -169,12 +169,11 @@
     });
 
     function displayfriendchat(friendId) {
-        console.log(friendId)
         $.get("http://localhost:3000/chat/getfriendchat/" + friendId, data => {
             var friendChat = null
             friendChat = data
-            console.log(friendChat)
             document.getElementById(friendChat._id).classList.toggle('active');
+            socket.emit('connected', userLogged, friendChat._id)
         })
     }
 
@@ -192,20 +191,20 @@
                     '<div class="chat-messages">'+
                     '</div>'+
                     '<div class="chat-options">'+
-                        '<input type="text" placeholder="Enviar mensaje" onclick="cliq(\''+this._id+'\')">'+
+                        '<input type="text" placeholder="Enviar mensaje" onclick="inputListener(\''+this._id+'\')">'+
                     '</div>'+
                 '</div>'
         })
     });
 
-    function cliq(chatId) {
-        socket.emit('connected', userLogged, chatId)
+    function inputListener(chatId) {
         var chat = document.getElementById(chatId).children;
         var selectedInput = chat[2].children[0] //dentro del chat, se dirige a su tercer hijo de div="options" y luego al hijo de ese options el cual es el input
         selectedInput.addEventListener('keypress', function () {
             if (event.keyCode === 13) {
                 event.preventDefault();
                 sendMessage(selectedInput.value);
+                selectedInput.value = ""
             }
         });
     }
@@ -225,33 +224,35 @@
                 message: message,
                 user: userLogged
             });
-            message = '';
         } else {
             alert("Escribe algo para enviar")
         }
     }
 
     // Recibe y muestra la conexion de un usuario
-    socket.once('userconnect', function (username) {
-        chatMessages = document.getElementsByClassName('chat-messages');
-        chatMessages.innerHTML += '<p>' + username + ' se ha conectado</p>'
+    socket.once('userconnect', function (currentlyChatId) {
+        var chat = document.getElementById(currentlyChatId).children;
+        var chatIndex = chat[0]
+        chatIndex.innerHTML += '<p> sosbuenoconmigo</p>'
     })
 
-    function insertMessages(message) {
+    function insertMessages(currentlyChatId, message) {
+        var chatId = currentlyChatId
         var messageId = message._id
+        var chat = document.getElementById(chatId).children;
+        var chatMessages = chat[1]
         chatMessages.innerHTML += '<div id="' + messageId +'">'
-        messageDiv = document.getElementById(messageId);
-        messageDiv.innerHTML += 
-            '<div>' +
-                '<p>' + message.message + '</p>' +
-                '<div id="'+messageId+'"><br></div>' +
-            '</div>'
+        var messageDiv = document.getElementById(messageId);
+        messageDiv.innerHTML +=
+            '<div id="'+messageId+'">'+
+            '<p>' + message.message + '</p>' +
+            '</div>' 
     }
 
     // Recibe y mustra el historial de mensajes
-    socket.on('chathistory', function (messages) {
+    socket.on('chathistory', function (currentlyChatId, messages) {
         $.each(messages, function () {
-            insertMessages(this)
+            insertMessages(currentlyChatId, this)
         })
         
     })
@@ -272,8 +273,9 @@
     });
 
     // Recibe y muestra el mensaje del usuario
-    socket.on('message', function (data) {
-        
-        insertMessages(data)
+    socket.on('message', function (currentlyChatId, message) {
+        var chatId = currentlyChatId
+        var message = message
+        insertMessages(chatId, message)
     });
 </script>

@@ -7,7 +7,6 @@ const messageController = require('../controllers/messageController');
 
 router.get('/getallchats', async function(req, res){
   const chats = await chatController.getAllChats();
-  console.log(chats)
   res.send(chats);
 })
 
