@@ -306,7 +306,7 @@
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 3000; /* Sit on top */
     padding-top: 15em; /* Location of the box */
     left: 0;
     top: 0;
@@ -384,13 +384,15 @@
 
 .chats {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 22em 22em;
+    grid-template-rows: 16em;
     position: sticky;
     z-index: 2000;
     bottom: 0;
     left: 0em;
     gap: 1em;
     justify-items: right;
+    justify-content: right;
     padding-right: 1em;
 }
 
