@@ -19,8 +19,8 @@ module.exports = (io) => {
         socket.name = userLogged.name
         socket.broadcast.emit('userconnect', userLogged.name)
       }
-      //var messages = await chatController.getAllMessages(chatId);
-      //socket.emit("chathistory", messages)
+      var messages = await chatController.getAllMessages(currentlyChat);
+      socket.emit("chathistory", messages)
     
     })
 
@@ -28,6 +28,7 @@ module.exports = (io) => {
     socket.on('message', async (data) => {
       console.log('enviaste este mensaje', data)
       const newMessage = await messageController.createAndSaveMessage(data)
+      console.log(currentlyChat)
       await chatController.addNewMessage(currentlyChat, newMessage._id)
       io.emit('message', newMessage);
     });

@@ -11,6 +11,13 @@ router.get('/getallchats', async function(req, res){
   res.send(chats);
 })
 
+router.get('/getfriendchat/:id', async function(req, res){
+  var friendId = req.params.id
+  console.log(friendId)
+  var friendChat = await chatController.findFriendChatByFriendId(friendId)
+  console.log(friendChat)
+})
+
 /*
 router.get('/data/:id', async function(req, res){
   const chat = await chatController.findById(req.params.id)

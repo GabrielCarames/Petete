@@ -182,6 +182,8 @@
 }
 
 
+
+
 .notification .notification-action {
     grid-area: notification-action;
     display: grid;
@@ -401,6 +403,7 @@
     background-color: rgb(29, 75, 92);
     color: #fff;
     border-radius: 5px;
+    display: none;
 }
 
 .chat .chat-index {

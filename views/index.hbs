@@ -70,7 +70,7 @@
     var friends = document.getElementById('friends')
     var chats = document.getElementById('chats')
     var userLogged
-
+    var chatMessages
     button.onclick = function () {
         modal.style.display = "block";
     }
@@ -149,23 +149,33 @@
     });
 
     $.get("http://localhost:3000/user/getalluserfriends", data => {
-        if (data.status) {
+       
+        if (data.status) {/*onclick="displayfriendchat('+ this._id +')*/
             $.each(data.friends, function () {
-                friends.innerHTML +=       
-                   '<div class="friend">'+
-                        '<div class="friend-info">'+
+                friends.innerHTML +=
+                   '<button class="friend" id="'+ this._id +'" onclick="displayfriendchat(\''+this._id+'\')">'+
+                        '<div class="friend-info">'+ // al tocar en un amigo, abrir su chat y pasarle la id de este amgio
                             '<div class="user-avatar">'+
                                 '<img src="' + this.avatar + '" alt="">'+
                             '</div>'+
                             '<div class="user-info">' + this.name + ' ' + this.surname +
                             '</div>'+
                         '</div>'+
-                    '</div>'
+                    '</button>'
             })
         } else {
             friends.innerHTML = data.message
         }
     });
+
+    function displayfriendchat(friendId) {
+        console.log("acatoy")
+        var cosa = $.get("http://localhost:3000/chat/getfriendchat/" + friendId)
+        /*var chat = document.getElementById(chatId).children;
+        var selectedInput = chat[2].children[0]
+        document.getElementById().getElementsByClassName('chat')
+        document.getElementById(friendId).classList.toggle('active');*/
+    }
 
     $.get("http://localhost:3000/chat/getallchats", data => {
         const allChats = data
@@ -186,23 +196,19 @@
                         '<span class="minimize">&minus;</span>'+
                         '<span class="close">&times;</span>'+
                     '</div>'+
-                    '<div class="chat-messages">'+ this.messages+
+                    '<div class="chat-messages">'+
                     '</div>'+
                     '<div class="chat-options">'+
-                        console.log(this)+
-                        console.log(this._id)+
                         '<input type="text" placeholder="Enviar mensaje" onclick="cliq(\''+this._id+'\')">'+
                     '</div>'+
                 '</div>'
         })
     });
 
-    function cliq(chatId) { //fijate que no se peuda enviar un string vacio
-        console.log(chatId)
+    function cliq(chatId) {
+        socket.emit('connected', userLogged, chatId)
         var chat = document.getElementById(chatId).children;
-        console.log("esa soy yo xaSDasdsad", chat)
-        console.log(chat[2].children[0].value); //dentro del chat, se dirige a su tercer hijo de div="options" y luego al hijo de ese options el cual es el input
-        var selectedInput = chat[2].children[0]
+        var selectedInput = chat[2].children[0] //dentro del chat, se dirige a su tercer hijo de div="options" y luego al hijo de ese options el cual es el input
         selectedInput.addEventListener('keypress', function () {
             if (event.keyCode === 13) {
                 event.preventDefault();
@@ -213,7 +219,7 @@
 
     //<--------------------------------------------------------------------Socket.io---------------------------------------------------------------------->
     // Envia al server que el usuario se conecto
-    socket.emit('connected', userLogged, chatId) //                                ACA PASARLE EL CHATID DE LAGUNA MANERA
+     //                                ACA PASARLE EL CHATID DE LAGUNA MANERA
     
     var a = document.getElementById('messageToSend');
     //Si el usuario toca el enter se llama a la función para enviar el mensaje
@@ -234,15 +240,15 @@
 
     // Recibe y muestra la conexion de un usuario
     socket.once('userconnect', function (username) {
-        messages.innerHTML += '<p>' + username + ' se ha conectado</p>'
+        chatMessages = document.getElementsByClassName('chat-messages');
+        console.log('hioa', chatMessages)
+        chatMessages.innerHTML += '<p>' + username + ' se ha conectado</p>'
     })
 
     function insertMessages(message) {
-        
-        messageId = message._id
-        console.log(message.message)
-        messageContent= message.message
-        messages.innerHTML += '<div id="' + messageId +'">'
+        var messageId = message._id
+        console.log(messageId)
+        chatMessages.innerHTML += '<div id="' + messageId +'">'
         messageDiv = document.getElementById(messageId);
         messageDiv.innerHTML += 
             '<div>' +

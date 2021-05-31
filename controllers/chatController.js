@@ -58,9 +58,14 @@ exports.getAllUsersGroup = async (name) => {
 }
 
 exports.findChatById = async (groupId) => {
-    return await Chat.findOne({ 
+    return await Chat.findOne({
         _id: groupId
     })
+}
+
+exports.findFriendChatByFriendId = async (friendId) => {
+    return await Chat.findOne({users: {$in: friendId}}) //busca el objeto chat, en donde en el campo de users, compara cual es la posición que sea igual al friendId
+    //utilizo el $in ya que el campo users no contiene campos definidos, por lo que hay que comparar por posiciones ya que es un array de usuarios.
 }
 
 exports.findChatByName = async (groupName) => {
