@@ -156,11 +156,13 @@
             $.each(data.friends, function () {
                 friends.innerHTML +=
                    '<button class="friend" id="'+ this._id +'" onclick="displayfriendchat(\''+this._id+'\')">'+
-                        '<div class="friend-info">'+ // al tocar en un amigo, abrir su chat y pasarle la id de este amgio
+                        '<div class="friend-info">'+
                             '<div class="user-avatar">'+
                                 '<img src="' + this.avatar + '" alt="">'+
                             '</div>'+
                             '<div class="user-info">' + this.name + ' ' + this.surname +
+                            '</div>'+
+                            '<div class="user-status">hola'+
                             '</div>'+
                         '</div>'+
                     '</button>'
