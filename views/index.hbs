@@ -71,6 +71,8 @@
     var chats = document.getElementById('chats')
     var userLogged
     var chatMessages
+    var userSpeaking = null
+
     button.onclick = function () {
         modal.style.display = "block";
     }
@@ -183,10 +185,10 @@
             chats.innerHTML +=
                 '<div class="chat" id="'+ this._id +'">'+
                     '<div class="chat-index">'+
-                        '<img src="" alt="">'+
+                        '<img src="'+this.users[0].avatar+'" alt="">'+
                         '<a href="#">'+ this.users[0].name +'</a>'+
                         '<span class="minimize">&minus;</span>'+
-                        '<span class="close">&times;</span>'+
+                        '<span class="close" onclick="closeChat(\''+this._id+'\')">&times;</span>'+
                     '</div>'+
                     '<div class="chat-messages">'+
                     '</div>'+
@@ -196,6 +198,11 @@
                 '</div>'
         })
     });
+
+    function closeChat(chatId) {
+        var chat = document.getElementById(chatId);
+        chat.classList.remove("active");
+    }
 
     function inputListener(chatId) {
         var chat = document.getElementById(chatId).children;
@@ -211,7 +218,6 @@
 
     //<--------------------------------------------------------------------Socket.io---------------------------------------------------------------------->
     // Envia al server que el usuario se conecto
-     //                                ACA PASARLE EL CHATID DE LAGUNA MANERA
     
     var a = document.getElementById('messageToSend');
     //Si el usuario toca el enter se llama a la función para enviar el mensaje
@@ -241,12 +247,19 @@
         var messageId = message._id
         var chat = document.getElementById(chatId).children;
         var chatMessages = chat[1]
-        chatMessages.innerHTML += '<div id="' + messageId +'">'
+        chatMessages.innerHTML += '<div class="message-content" id="' + messageId +'">'
         var messageDiv = document.getElementById(messageId);
-        messageDiv.innerHTML +=
-            '<div id="'+messageId+'">'+
-            '<p>' + message.message + '</p>' +
-            '</div>' 
+        console.log(userSpeaking)
+        if(userSpeaking) {
+            messageDiv.innerHTML += 
+            '&nbsp'+
+            '<p>' + message.message + '</p>'
+        }else{ 
+            userSpeaking = message.user._id
+            messageDiv.innerHTML +=
+            '<img src="'+message.user.avatar+'" alt="feo">'+
+            '<p>' + message.message + '</p>'
+        }
     }
 
     // Recibe y mustra el historial de mensajes
@@ -274,8 +287,6 @@
 
     // Recibe y muestra el mensaje del usuario
     socket.on('message', function (currentlyChatId, message) {
-        var chatId = currentlyChatId
-        var message = message
-        insertMessages(chatId, message)
+        insertMessages(currentlyChatId, message)
     });
 </script>

@@ -18,9 +18,7 @@ module.exports = (io) => {
         socket.name = userLogged.name
         socket.broadcast.emit('userconnect', currentlyChatId)
       }
-      console.log(currentlyChatId)
       var messages = await chatController.getAllMessages(currentlyChatId);
-      console.log(messages)
       socket.emit("chathistory", currentlyChatId, messages)
     
     })
@@ -30,6 +28,9 @@ module.exports = (io) => {
       const newMessage = await messageController.createAndSaveMessage(data)
       await chatController.addNewMessage(currentlyChatId, newMessage._id)
       io.emit('message', currentlyChatId, newMessage);
+      //si el usuario mandó un mensaje, almacenarlo en una variable, entonces el proximo usuario que hable, se verifica que la id de la variable no sea igual a la del user del mensaje
+      //si es igual, no mostrar su foto
+      //si no es igual, significa que esta hablando el otro usuario, por lo que si se tiene que mostrar su foto.
     });
 
     // Recibe y envia que un usuario esta escribiendo
