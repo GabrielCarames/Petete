@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var url = "mongodb://localhost:27017/petete";
+var url = "mongodb+srv://dbparchesarmas:5tTkT0IWxkgwCQpy@clusterparches.npjim.mongodb.net/dbparchesarmas?retryWrites=true&w=majority";
 
 mongoose.connect(url, {
     useNewUrlParser: true,

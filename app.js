@@ -1,6 +1,6 @@
 const exphbs = require('express-handlebars');
 var cookieParser = require('cookie-parser');
-var session = require('cookie-session');
+var session = require('express-session');
 var createError = require('http-errors');
 const flash = require('connect-flash');
 const passport = require('passport');
