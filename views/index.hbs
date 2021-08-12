@@ -101,11 +101,11 @@
         document.querySelector('.friends-panel').classList.toggle('active');
     });
 
-    $.get("http://localhost:3000/user/getuserlogged", data => {
+    $.get("/user/getuserlogged", data => {
         userLogged = data
     });
 
-    $.get("http://localhost:3000/user/getnotifications", data => {
+    $.get("/user/getnotifications", data => {
         if (data.status) {
             $.each(data.userNotifications, function () {
                 notifications.innerHTML +=
@@ -129,7 +129,7 @@
         }
     });
 
-    $.get("http://localhost:3000/publications/getallpublications", data => {
+    $.get("/publications/getallpublications", data => {
         if (data.status) {
             $.each(data.publications, function () {
                 publications.innerHTML +=       
@@ -150,7 +150,7 @@
         }
     });
 
-    $.get("http://localhost:3000/user/getalluserfriends", data => {
+    $.get("/user/getalluserfriends", data => {
        
         if (data.status) {/*onclick="displayfriendchat('+ this._id +')*/
             $.each(data.friends, function () {
@@ -173,7 +173,7 @@
     });
 
     function displayfriendchat(friendId) {
-        $.get("http://localhost:3000/chat/getfriendchat/" + friendId, data => {
+        $.get("/chat/getfriendchat/" + friendId, data => {
             var friendChat = null
             friendChat = data
             document.getElementById(friendChat._id).classList.toggle('active');
@@ -181,7 +181,7 @@
         })
     }
 
-    $.get("http://localhost:3000/chat/getallchats", data => {
+    $.get("/chat/getallchats", data => {
         const allChats = data 
         $.each(allChats, function () {
             chats.innerHTML +=
